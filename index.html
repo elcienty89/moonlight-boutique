@@ -170,32 +170,11 @@
 <body class="min-h-screen">
 
   <!-- Header Premium -->
-  <header class="sticky top-0 z-50 bg-white border-b border-gray-100"
-    style="backdrop-filter: blur(20px); background: rgba(255,255,255,0.95);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <img src="images/logo.png" alt="MoonLight" class="h-12 w-auto" />
-        </div>
-
-        <!-- Navigation -->
-        <nav class="hidden md:flex space-x-8">
-          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Nuevos</a>
-          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Premium</a>
-          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Ofertas</a>
-        </nav>
-
-        <!-- Search Icon -->
-        <div class="flex items-center">
-          <button class="p-2 rounded-full hover:bg-gray-100 transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-        </div>
-      </div>
+  <header
+    class="sticky top-0 z-50 bg-white/85 backdrop-filter backdrop-blur-md border-b border-gray-200/50 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col items-center justify-center">
+      <img src="images/logo.png" alt="Logo MoonLight"
+        class="h-48 w-auto transform hover:scale-105 transition-transform duration-500" />
     </div>
   </header>
 
@@ -206,9 +185,6 @@
         <h1 class="hero-title mb-6">
           DESCUBRE LA<br />NUEVA COLECCIÓN
         </h1>
-        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-          Estilo premium, calidad excepcional. Encuentra las mejores marcas y tendencias.
-        </p>
       </div>
     </div>
   </section>
@@ -270,29 +246,8 @@
 
   <!-- Footer -->
   <footer class="bg-black text-white mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="font-bold text-lg mb-4">MOONLIGHT</h3>
-          <p class="text-gray-400 text-sm">Premium fashion & lifestyle</p>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4">AYUDA</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#" class="hover:text-white transition">Contacto</a></li>
-            <li><a href="#" class="hover:text-white transition">Envíos</a></li>
-            <li><a href="#" class="hover:text-white transition">Devoluciones</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4">LEGAL</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#" class="hover:text-white transition">Privacidad</a></li>
-            <li><a href="#" class="hover:text-white transition">Términos</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="text-center text-sm text-gray-400">
         <p>&copy; 2025 MoonLight. Todos los derechos reservados.</p>
       </div>
     </div>
