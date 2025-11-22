@@ -111,4 +111,52 @@ const PRODUCTS = [
         imagen: "images/vestido_floral_1763621984939.png",
         disponible: true,
     },
+
+    // ============================
+    // PREMIUM - MARCAS PREMIUM
+    // ============================
+    {
+        id: 10,
+        nombre: "Pantalón Premium Diseñador",
+        categoria: "Premium",
+        subcategoria: "Pantalones",
+        genero: "hombre",
+        precio: 89.99,
+        descripcion: "Pantalón de marca premium, corte perfecto y tela de alta calidad.",
+        imagen: "https://via.placeholder.com/400x300?text=Pantalon+Premium",
+        disponible: true,
+    },
+    {
+        id: 11,
+        nombre: "Pullover Cashmere Lujo",
+        categoria: "Premium",
+        subcategoria: "Pullovers",
+        genero: "mujer",
+        precio: 149.99,
+        descripcion: "Pullover de cashmere auténtico, suave y elegante.",
+        imagen: "https://via.placeholder.com/400x300?text=Pullover+Premium",
+        disponible: true,
+    },
+    {
+        id: 12,
+        nombre: "Shorts Premium Verano",
+        categoria: "Premium",
+        subcategoria: "Shorts",
+        genero: "unisex",
+        precio: 69.99,
+        descripcion: "Shorts de marca reconocida, tela ligera y diseño exclusivo.",
+        imagen: "https://via.placeholder.com/400x300?text=Shorts+Premium",
+        disponible: true,
+    },
+    {
+        id: 13,
+        nombre: "Zapatos Deportivos Premium",
+        categoria: "Premium",
+        subcategoria: "Zapatos",
+        genero: "unisex",
+        precio: 199.99,
+        descripcion: "Calzado deportivo de marca premium, tecnología avanzada y estilo único.",
+        imagen: "https://via.placeholder.com/400x300?text=Zapatos+Premium",
+        disponible: true,
+    },
 ];
