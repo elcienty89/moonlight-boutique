@@ -168,61 +168,62 @@ function renderProducts(list) {
 
     if (list.length === 0) {
         productGrid.innerHTML =
-            '<p class="text-sm text-gray-500 col-span-full text-center py-8">No hay productos que coincidan con los filtros.</p>';
+            '<p class="text-lg text-gray-400 col-span-full text-center py-16">No encontramos productos que coincidan con tu búsqueda.</p>';
         productCount.textContent = "0 productos";
         return;
     }
 
     productCount.textContent =
         list.length === 1
-            ? "1 producto encontrado"
-            : list.length + " productos encontrados";
+            ? "1 producto"
+            : list.length + " productos";
 
     list.forEach((p) => {
         const card = document.createElement("article");
-        // Premium Card Styles
+        // Nike-inspired Premium Card
         card.className =
-            "bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col cursor-pointer group transform hover:-translate-y-1";
+            "product-card bg-white rounded-2xl overflow-hidden flex flex-col cursor-pointer group";
 
         // Al hacer click en la tarjeta, abrimos el modal
         card.onclick = () => openModal(p.id);
 
+        // Badge premium para categoría Premium
+        const isPremium = p.categoria === "Premium";
+        const categoryBadge = isPremium
+            ? `<span class="badge-premium">Premium</span>`
+            : `<span class="absolute top-4 left-4 bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 rounded-full">${p.categoria}</span>`;
+
         card.innerHTML = `
-      <div class="h-64 bg-gray-100 overflow-hidden relative">
+      <div class="relative bg-gray-50 overflow-hidden" style="aspect-ratio: 1/1;">
         <img
           src="${p.imagen}"
           alt="${p.nombre}"
-          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen';"
+          class="w-full h-full object-cover"
+          onerror="this.src='https://via.placeholder.com/600x600?text=Sin+Imagen';"
         />
-        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-500"></div>
-        
-        <!-- Badge de categoría flotante -->
-        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-gray-800 rounded-full shadow-sm">
-            ${p.categoria}
-        </span>
+        ${categoryBadge}
       </div>
       
-      <div class="p-5 flex-1 flex flex-col">
-        <div class="mb-2">
-            <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="mb-3">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
             ${p.subcategoria}
             </p>
-            <h3 class="text-lg font-serif font-bold text-gray-900 leading-tight group-hover:text-indigo-900 transition-colors">
+            <h3 class="text-xl font-bold text-gray-900 leading-tight mb-2">
             ${p.nombre}
             </h3>
         </div>
         
-        <p class="text-sm text-gray-600 mb-4 line-clamp-2 font-light">
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2">
           ${p.descripcion}
         </p>
         
-        <div class="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
-          <span class="text-xl font-serif font-bold text-gray-900">
+        <div class="mt-auto flex items-center justify-between pt-4">
+          <span class="text-2xl font-black text-gray-900">
             $${p.precio.toFixed(2)}
           </span>
           <button
-            class="text-xs bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center gap-2"
+            class="bg-black hover:bg-gray-800 text-white font-semibold py-2.5 px-5 rounded-full transition-all transform hover:scale-105 flex items-center gap-2 text-sm"
             onclick="event.stopPropagation(); contactarWhatsApp(${p.id})"
           >
             <span>WhatsApp</span>

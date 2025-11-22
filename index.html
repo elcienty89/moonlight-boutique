@@ -3,179 +3,340 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>MoonLight (Catalogo)</title>
+  <title>MoonLight - Premium Collection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <!-- TailwindCSS CDN para estilos rápidos -->
+  <!-- TailwindCSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 
   <style>
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
-      font-family: 'Lato', sans-serif;
+      background: #fff;
+      color: #111;
     }
 
-    /* Mobile Optimization: Scale down base size */
-    @media (max-width: 640px) {
-      html {
-        font-size: 14px;
-      }
+    /* Nike-inspired Typography */
+    .hero-title {
+      font-size: clamp(2rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
     }
 
-    h1,
-    h2,
-    h3,
-    .font-serif {
-      font-family: 'Playfair Display', serif;
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* Premium Card Hover Effects */
+    .product-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .product-card img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover img {
+      transform: scale(1.08);
     }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
+      height: 6px;
     }
 
     ::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #f5f5f5;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #c7c7c7;
-      border-radius: 4px;
+      background: #111;
+      border-radius: 3px;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: #a8a8a8;
+    /* Premium Button */
+    .btn-premium {
+      background: #111;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-premium:hover {
+      background: #333;
+      transform: scale(1.05);
+    }
+
+    /* Filter Buttons */
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+      color: #111;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      border-color: #111;
+    }
+
+    .filter-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* Badge Premium */
+    .badge-premium {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Modal Premium */
+    .modal-backdrop {
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* Hide default select */
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23111' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 min-h-screen flex flex-col">
+<body class="min-h-screen">
 
-  <!-- Encabezado Sticky con efecto Glassmorphism (iOS 26 Style) -->
-  <header
-    class="sticky top-0 z-50 bg-white/85 backdrop-filter backdrop-blur-md border-b border-gray-200/50 shadow-sm transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-4 py-2 flex flex-col items-center justify-center">
-      <img src="images/logo.png" alt="Logo MoonLight"
-        class="h-48 w-auto transform hover:scale-105 transition-transform duration-500" />
+  <!-- Header Premium -->
+  <header class="sticky top-0 z-50 bg-white border-b border-gray-100"
+    style="backdrop-filter: blur(20px); background: rgba(255,255,255,0.95);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <img src="images/logo.png" alt="MoonLight" class="h-12 w-auto" />
+        </div>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Nuevos</a>
+          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Premium</a>
+          <a href="#" class="text-sm font-semibold text-gray-900 hover:text-gray-600 transition">Ofertas</a>
+        </nav>
+
+        <!-- Search Icon -->
+        <div class="flex items-center">
+          <button class="p-2 rounded-full hover:bg-gray-100 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Contenido principal -->
-  <main class="flex-1 max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-8 w-full">
-
-    <!-- Filtros -->
-    <section
-      class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-sm border border-white/50 p-4 sm:p-6 mb-6 sm:mb-8 grid gap-4 sm:gap-6 grid-cols-2 md:grid-cols-4">
-      <!-- Categoría -->
-      <div class="col-span-1">
-        <label for="categoryFilter"
-          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Categoría</label>
-        <select id="categoryFilter"
-          class="block w-full bg-white border-gray-200 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2 px-4 transition-shadow hover:shadow-md">
-          <option value="todas">Todas</option>
-        </select>
+  <!-- Hero Section -->
+  <section class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center fade-in-up">
+        <h1 class="hero-title mb-6">
+          DESCUBRE LA<br />NUEVA COLECCIÓN
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          Estilo premium, calidad excepcional. Encuentra las mejores marcas y tendencias.
+        </p>
       </div>
+    </div>
+  </section>
 
-      <!-- Subcategoría -->
-      <div class="col-span-1">
-        <label for="subcategoryFilter"
-          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Subcategoría</label>
-        <select id="subcategoryFilter"
-          class="block w-full bg-white border-gray-200 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2 px-4 transition-shadow hover:shadow-md">
-          <option value="todas">Todas</option>
-        </select>
-      </div>
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
 
-      <!-- Género -->
-      <div class="col-span-1">
-        <label for="genderFilter"
-          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Género</label>
-        <select id="genderFilter"
-          class="block w-full bg-white border-gray-200 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2 px-4 transition-shadow hover:shadow-md">
-          <option value="todos">Todos</option>
-          <option value="hombre">Hombre</option>
-          <option value="mujer">Mujer</option>
-          <option value="unisex">Unisex</option>
-        </select>
-      </div>
+    <!-- Filters Section -->
+    <section class="mb-12">
+      <div class="flex flex-col space-y-6">
 
-      <!-- Buscador -->
-      <div class="col-span-1">
-        <label for="searchInput"
-          class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Buscar</label>
-        <input type="text" id="searchInput" placeholder="Buscar..."
-          class="block w-full bg-white border-gray-200 rounded-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2 px-4 transition-shadow hover:shadow-md" />
+        <!-- Category Pills -->
+        <div class="flex flex-wrap gap-3">
+          <h3 class="w-full text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Categorías</h3>
+          <button class="filter-btn" onclick="filterByCategory('todas')">Todas</button>
+          <button id="catRopa" class="filter-btn" onclick="filterByCategory('Ropa')">Ropa</button>
+          <button id="catZapatos" class="filter-btn" onclick="filterByCategory('Zapatos')">Zapatos</button>
+          <button id="catMaquillaje" class="filter-btn" onclick="filterByCategory('Maquillaje')">Maquillaje</button>
+          <button id="catPremium" class="filter-btn" onclick="filterByCategory('Premium')">Premium ✨</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-md">
+          <div class="relative">
+            <input type="text" id="searchInput" placeholder="Buscar productos..."
+              class="w-full px-6 py-3 rounded-full border border-gray-200 focus:border-gray-900 focus:outline-none transition" />
+            <svg class="w-5 h-5 absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Advanced Filters (Hidden selects for compatibility) -->
+        <div class="hidden">
+          <select id="categoryFilter"></select>
+          <select id="subcategoryFilter"></select>
+          <select id="genderFilter"></select>
+        </div>
+
       </div>
     </section>
 
-    <!-- Resumen -->
-    <div class="flex items-center justify-between mb-4 sm:mb-6 px-2">
-      <h2 class="text-xl sm:text-2xl font-serif font-bold text-gray-900">Colección</h2>
-      <span id="productCount"
-        class="text-xs sm:text-sm font-medium text-gray-500 bg-white px-3 py-1 rounded-full shadow-sm"></span>
+    <!-- Product Count -->
+    <div class="mb-8">
+      <h2 class="section-title">
+        Colección
+      </h2>
+      <p id="productCount" class="text-gray-500 mt-2"></p>
     </div>
 
-    <!-- Grid de productos -->
-    <section id="productGrid" class="grid gap-4 grid-cols-2 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Aquí se inyectan las tarjetas por JavaScript -->
+    <!-- Products Grid -->
+    <section id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Products will be injected here -->
     </section>
+
   </main>
 
-  <!-- Pie de página -->
-  <footer class="bg-white border-t border-gray-200 mt-auto">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-gray-400 flex justify-between items-center">
-      <span>&copy; 2025 MoonLight Boutique</span>
-      <span>Diseño Premium</span>
+  <!-- Footer -->
+  <footer class="bg-black text-white mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-bold text-lg mb-4">MOONLIGHT</h3>
+          <p class="text-gray-400 text-sm">Premium fashion & lifestyle</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">AYUDA</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+            <li><a href="#" class="hover:text-white transition">Envíos</a></li>
+            <li><a href="#" class="hover:text-white transition">Devoluciones</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">LEGAL</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Privacidad</a></li>
+            <li><a href="#" class="hover:text-white transition">Términos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+        <p>&copy; 2025 MoonLight. Todos los derechos reservados.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Modal de Producto -->
-  <div id="productModal"
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4 transition-opacity duration-300"
+  <!-- Modal -->
+  <div id="productModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4"
     onclick="closeModal(event)">
     <div
-      class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]"
+      class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]"
       onclick="event.stopPropagation()">
 
-      <button
-        class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 z-10 bg-white/80 rounded-full p-2 transition-colors"
+      <button class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-gray-100 transition"
         onclick="closeModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
-      <!-- Imagen Modal -->
-      <div class="w-full md:w-1/2 bg-gray-100 h-64 md:h-auto relative">
-        <img id="modalImage" src="" alt="" class="w-full h-full object-contain" />
+      <!-- Image -->
+      <div class="w-full md:w-1/2 bg-gray-50 h-80 md:h-auto relative">
+        <img id="modalImage" src="" alt="" class="w-full h-full object-contain p-8" />
       </div>
 
-      <!-- Contenido Modal -->
-      <div class="w-full md:w-1/2 p-6 sm:p-8 flex flex-col overflow-y-auto">
-        <div class="mb-1">
-          <p id="modalCategory" class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2"></p>
-          <h3 id="modalTitle" class="text-2xl sm:text-3xl font-serif font-bold text-gray-900 mb-4 leading-tight"></h3>
+      <!-- Content -->
+      <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col overflow-y-auto">
+        <div class="mb-6">
+          <p id="modalCategory" class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3"></p>
+          <h3 id="modalTitle" class="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight"></h3>
         </div>
 
-        <div class="prose prose-sm text-gray-600 mb-8 flex-1">
-          <p id="modalDescription" class="leading-relaxed"></p>
-        </div>
+        <p id="modalDescription" class="text-gray-600 mb-8 leading-relaxed"></p>
 
-        <div class="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
-          <div class="flex flex-col">
-            <span class="text-xs text-gray-500 uppercase">Precio</span>
-            <span id="modalPrice" class="text-2xl sm:text-3xl font-serif font-bold text-gray-900"></span>
+        <div class="mt-auto pt-6 border-t border-gray-100">
+          <div class="flex items-end justify-between mb-6">
+            <div>
+              <p class="text-xs text-gray-500 uppercase mb-1">Precio</p>
+              <p id="modalPrice" class="text-4xl font-black"></p>
+            </div>
           </div>
 
           <button id="modalWhatsappBtn"
-            class="bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-6 sm:px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base">
-            <span>Disponibilidad</span>
+            class="btn-premium w-full py-4 flex items-center justify-center gap-3 text-base">
+            <span>CONSULTAR DISPONIBILIDAD</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -186,9 +347,30 @@
     </div>
   </div>
 
-  <!-- Lógica de la página -->
+  <!-- Scripts -->
   <script src="products.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    // Category filter function for buttons
+    let currentCategory = 'todas';
+
+    function filterByCategory(category) {
+      currentCategory = category;
+
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Update hidden select (for compatibility with existing script.js)
+      const categorySelect = document.getElementById('categoryFilter');
+      categorySelect.value = category;
+      categorySelect.dispatchEvent(new Event('change'));
+    }
+  </script>
+
 </body>
 
 </html>
