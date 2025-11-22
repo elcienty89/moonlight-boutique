@@ -123,7 +123,7 @@ const PRODUCTS = [
         genero: "hombre",
         precio: 89.99,
         descripcion: "Pantalón de marca premium, corte perfecto y tela de alta calidad.",
-        imagen: "https://via.placeholder.com/400x300?text=Pantalon+Premium",
+        imagen: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=300&fit=crop",
         disponible: true,
     },
     {
@@ -134,7 +134,7 @@ const PRODUCTS = [
         genero: "mujer",
         precio: 149.99,
         descripcion: "Pullover de cashmere auténtico, suave y elegante.",
-        imagen: "https://via.placeholder.com/400x300?text=Pullover+Premium",
+        imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=300&fit=crop",
         disponible: true,
     },
     {
@@ -145,7 +145,7 @@ const PRODUCTS = [
         genero: "unisex",
         precio: 69.99,
         descripcion: "Shorts de marca reconocida, tela ligera y diseño exclusivo.",
-        imagen: "https://via.placeholder.com/400x300?text=Shorts+Premium",
+        imagen: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=300&fit=crop",
         disponible: true,
     },
     {
@@ -156,7 +156,7 @@ const PRODUCTS = [
         genero: "unisex",
         precio: 199.99,
         descripcion: "Calzado deportivo de marca premium, tecnología avanzada y estilo único.",
-        imagen: "https://via.placeholder.com/400x300?text=Zapatos+Premium",
+        imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
         disponible: true,
     },
 ];
