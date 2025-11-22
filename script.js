@@ -66,6 +66,7 @@ const filters = {
 
 function initFilters() {
     // Llenar categorías
+    categorySelect.innerHTML = '<option value="todas">Todas</option>'; // Fix: Agregar opción Todas
     const categorias = Array.from(
         new Set(PRODUCTS.map((p) => p.categoria))
     ).sort();
@@ -76,6 +77,17 @@ function initFilters() {
         opt.textContent = cat;
         categorySelect.appendChild(opt);
     });
+
+    // Llenar géneros (Fix: asegurar opciones de género)
+    if (genderSelect.options.length === 0) {
+        const generos = ["todos", "mujer", "hombre", "unisex"];
+        generos.forEach(gen => {
+            const opt = document.createElement("option");
+            opt.value = gen;
+            opt.textContent = gen.charAt(0).toUpperCase() + gen.slice(1);
+            genderSelect.appendChild(opt);
+        });
+    }
 
     updateSubcategoriesOptions();
 
