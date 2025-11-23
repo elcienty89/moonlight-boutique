@@ -1,0 +1,911 @@
+/* ======================================
+   MOONLIGHT BOUTIQUE - DESIGN SYSTEM
+   ====================================== */
+
+/* CSS Variables - Brand Colors & Design Tokens */
+:root {
+    /* Colors */
+    --color-primary: #111;
+    --color-secondary: #6366f1;
+    --color-accent: #f59e0b;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+
+    /* Backgrounds */
+    --color-bg-main: #ffffff;
+    --color-bg-secondary: #f9fafb;
+    --color-bg-tertiary: #f3f4f6;
+
+    /* Text Colors */
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    --color-text-tertiary: #9ca3af;
+
+    /* Borders */
+    --color-border: #e5e7eb;
+    --color-border-light: #f3f4f6;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: var(--color-bg-main);
+    color: var(--color-text-primary);
+}
+
+/* Typography */
+.hero-title {
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.subsection-title {
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+/* Premium Product Card */
+.product-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.product-card img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Discount Badge */
+.discount-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-danger);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 700;
+    z-index: 10;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}
+
+/* Buttons */
+.btn-premium {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all var(--transition-normal);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-premium:hover {
+    background: #333;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-main);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-secondary);
+}
+
+.filter-btn.active {
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+/* Badge Premium */
+.badge-premium {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-md);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Flash Sale Banner */
+.flash-banner {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.flash-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.flash-banner h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.countdown-value {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+/* Modal Premium */
+.modal-backdrop {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.modal-content {
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Image Gallery */
+.gallery-main {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.gallery-thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.gallery-thumbnail {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.gallery-thumbnail:hover {
+    border-color: var(--color-border);
+}
+
+.gallery-thumbnail.active {
+    border-color: var(--color-primary);
+}
+
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Size & Color Selectors */
+.size-selector,
+.color-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.size-option,
+.color-option {
+    min-width: 45px;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.size-option:hover,
+.color-option:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-secondary);
+}
+
+.size-option.active,
+.color-option.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.size-option.disabled,
+.color-option.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.size-option.disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-danger);
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.color-swatch.active::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 900;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Price Range Slider */
+.price-range {
+    padding: 1rem 0;
+}
+
+.price-range input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.price-range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+}
+
+.price-range input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    border: none;
+}
+
+/* Stock Indicator */
+.stock-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.stock-indicator.in-stock {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.stock-indicator.low-stock {
+    background: #fed7aa;
+    color: #92400e;
+}
+
+.stock-indicator.out-of-stock {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.stock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: blink 2s infinite;
+}
+
+.stock-indicator.in-stock .stock-dot {
+    background: #10b981;
+}
+
+.stock-indicator.low-stock .stock-dot {
+    background: #f59e0b;
+}
+
+.stock-indicator.out-of-stock .stock-dot {
+    background: #ef4444;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Loading States */
+.skeleton {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: var(--radius-md);
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-xl);
+    transition: all var(--transition-normal);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px);
+    background: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+
+    .countdown-item {
+        min-width: 50px;
+    }
+
+    .scroll-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Hide default select arrow */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23111' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* Filter Panel */
+.filter-panel {
+    background: var(--color-bg-main);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    display: block;
+    letter-spacing: 0.05em;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Active Filters Display */
+.active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.filter-tag button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: background var(--transition-fast);
+}
+
+.filter-tag button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Related Products */
+.related-products {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.related-card {
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.25);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Gender-specific glassmorphism effects - Apple Style */
+.filter-btn.active-mujer {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.7), rgba(255, 105, 180, 0.6)) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 105, 180, 0.6) !important;
+    color: #d81b60 !important;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.35);
+}
+
+.filter-btn.active-hombre {
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.7), rgba(100, 149, 237, 0.6)) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(100, 149, 237, 0.6) !important;
+    color: #1565c0 !important;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(100, 149, 237, 0.35);
+}
+
+/* Gender colors - SOLID and VISIBLE */
+.filter-btn.active-mujer {
+    background: #FFB6C1 !important;
+    border: 2px solid #FF69B4 !important;
+    color: #C71585 !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+}
+
+.filter-btn.active-hombre {
+    background: #ADD8E6 !important;
+    border: 2px solid #6495ED !important;
+    color: #1E90FF !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(100, 149, 237, 0.4);
+}
+
+/* Image Gallery */
+.gallery-thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.gallery-thumbnail {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.gallery-thumbnail:hover {
+    border-color: #e5e7eb;
+}
+
+.gallery-thumbnail.active {
+    border-color: #111;
+}
+
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Size & Color Selectors */
+.selector-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    display: block;
+    letter-spacing: 0.05em;
+}
+
+.size-selector,
+.color-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.size-option {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0 0.75rem;
+}
+
+.size-option:hover {
+    border-color: #111;
+}
+
+.size-option.active {
+    background: #111;
+    color: white;
+    border-color: #111;
+}
+
+.color-option {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.color-option::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s;
+}
+
+.color-option:hover::after {
+    border-color: #9ca3af;
+}
+
+.color-option.active::after {
+    border-color: #111;
+    border-width: 2px;
+}
+
+/* WhatsApp Buttons - Premium Green Style */
+.whatsapp-btn {
+    transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    border-color: #25D366 !important;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transform: scale(1.05);
+}
+
+.whatsapp-btn:active {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%) !important;
+    transform: scale(0.98);
+}
+
+/* Modal WhatsApp Button - Premium */
+#modalWhatsappBtn {
+    transition: all 0.3s ease;
+}
+
+#modalWhatsappBtn:hover {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
+    transform: scale(1.05);
+}
+
+#modalWhatsappBtn:active {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%) !important;
+    transform: scale(0.98);
+}

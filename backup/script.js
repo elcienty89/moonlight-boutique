@@ -25,82 +25,56 @@ function openModal(productId) {
     modalCategory.textContent = `${p.categoria} • ${p.subcategoria}`;
     modalDescription.textContent = p.descripcion;
 
-    // CREATE GALLERY THUMBNAILS HERE
-    createGalleryThumbnails(p);
+    // Image Gallery - Show thumbnails if product has multiple images
+    const imageContainer = modalImage.parentElement;
 
-    // Mostrar siempre el precio sin descuento
-    modalPrice.textContent = `$${p.precio.toFixed(2)}`;
+    // Remove existing thumbnail container if any
+    const existingThumbnails = imageContainer.querySelector('.image-thumbnails');
+    if (existingThumbnails) existingThumbnails.remove();
+
+    // Create thumbnails if product has multiple images
+    if (p.imagenes && p.imagenes.length > 1) {
+        const thumbnailContainer = document.createElement('div');
+        thumbnailContainer.className = 'image-thumbnails flex gap-2 mt-4 px-8 overflow-x-auto pb-2';
+
+        p.imagenes.forEach((img, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = img;
+            thumb.className = `thumbnail cursor-pointer w-16 h-16 object-cover rounded-lg border-2 transition-all ${index === 0 ? 'border-black' : 'border-gray-200'} hover:border-black`;
+            thumb.onclick = () => {
+                modalImage.src = img;
+                // Update active thumbnail
+                thumbnailContainer.querySelectorAll('.thumbnail').forEach(t => {
+                    t.classList.remove('border-black');
+                    t.classList.add('border-gray-200');
+                });
+                thumb.classList.remove('border-gray-200');
+                thumb.classList.add('border-black');
+            };
+            thumbnailContainer.appendChild(thumb);
+        });
+
+        imageContainer.appendChild(thumbnailContainer);
+    }
+
+    // Calcular precio con descuento para el modal
+    const discount = typeof getProductDiscount === 'function' ? getProductDiscount(p.id) : 0;
+    const finalPrice = typeof getDiscountedPrice === 'function' ? getDiscountedPrice(p.id, p.precio) : p.precio;
+
+    if (discount > 0) {
+        modalPrice.innerHTML = `
+            <span class="text-xl text-gray-400 line-through mr-2">$${p.precio.toFixed(2)}</span>
+            <span class="text-4xl font-black text-red-600">$${finalPrice.toFixed(2)}</span>
+        `;
+    } else {
+        modalPrice.textContent = `$${p.precio.toFixed(2)}`;
+    }
 
     // Configurar botón de WhatsApp del modal
     modalWhatsappBtn.onclick = () => contactarWhatsApp(p.id);
 
     modal.classList.remove("hidden");
     modal.classList.add("flex");
-}
-
-function createGalleryThumbnails(product) {
-    // Find or create thumbnails container
-    let thumbnailsContainer = document.getElementById('modalThumbnails');
-    const imageContainer = modalImage.parentElement;
-
-    if (!imageContainer) return;
-
-    // Create container if doesn't exist
-    if (!thumbnailsContainer) {
-        thumbnailsContainer = document.createElement('div');
-        thumbnailsContainer.id = 'modalThumbnails';
-        thumbnailsContainer.style.cssText = 'position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap: 8px; padding: 8px; background: rgba(0,0,0,0.6); border-radius: 8px; backdrop-filter: blur(8px);';
-        imageContainer.appendChild(thumbnailsContainer);
-    }
-
-    // Clear previous thumbnails
-    thumbnailsContainer.innerHTML = '';
-
-    // Hide if only one image
-    if (!product.imagenes || product.imagenes.length <= 1) {
-        thumbnailsContainer.style.display = 'none';
-        return;
-    }
-
-    // Show and populate thumbnails
-    thumbnailsContainer.style.display = 'flex';
-
-    product.imagenes.forEach((img, i) => {
-        const thumb = document.createElement('img');
-        thumb.src = img;
-        thumb.style.cssText = `width: 48px; height: 48px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid ${i === 0 ? 'white' : 'transparent'}; transition: all 0.3s; opacity: ${i === 0 ? '1' : '0.7'};`;
-
-        thumb.onmouseover = function () {
-            this.style.transform = 'scale(1.1)';
-            if (this.style.borderColor !== 'white') this.style.opacity = '1';
-        };
-
-        thumb.onmouseout = function () {
-            this.style.transform = 'scale(1)';
-            if (this.style.borderColor !== 'white') this.style.opacity = '0.7';
-        };
-
-        thumb.onclick = function () {
-            // Fade out
-            modalImage.style.opacity = '0';
-            setTimeout(() => {
-                modalImage.src = img;
-                modalImage.style.opacity = '1';
-            }, 200);
-
-            // Update thumbnail borders
-            thumbnailsContainer.querySelectorAll('img').forEach(t => {
-                t.style.borderColor = 'transparent';
-                t.style.opacity = '0.7';
-            });
-            this.style.borderColor = 'white';
-            this.style.opacity = '1';
-        };
-
-        thumbnailsContainer.appendChild(thumb);
-    });
-
-    console.log('✅ Gallery created with', product.imagenes.length, 'images');
 }
 
 function closeModal(event) {
@@ -251,16 +225,32 @@ function renderProducts(list) {
         card.className = "product-card bg-white rounded-2xl overflow-hidden flex flex-col cursor-pointer group shadow-sm hover:shadow-xl transition-all duration-300";
         card.onclick = () => openModal(p.id);
 
-        // Badge Logic (sin descuentos)
+        // Calcular Descuentos
+        const discount = typeof getProductDiscount === 'function' ? getProductDiscount(p.id) : 0;
+        const finalPrice = typeof getDiscountedPrice === 'function' ? getDiscountedPrice(p.id, p.precio) : p.precio;
+
+        // Badge Logic
         let badgeHtml = '';
-        if (p.categoria === "Premium") {
+        if (discount > 0) {
+            badgeHtml = `<span class="discount-badge">-${discount}%</span>`;
+        } else if (p.categoria === "Premium") {
             badgeHtml = `<span class="badge-premium absolute top-4 left-4 z-10">Premium</span>`;
         } else {
             badgeHtml = `<span class="absolute top-4 left-4 bg-white/90 backdrop-filter backdrop-blur-sm px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 rounded-full shadow-sm z-10">${p.categoria}</span>`;
         }
 
-        // Price Logic (sin descuentos)
-        let priceHtml = `<span class="text-2xl font-black text-gray-900">$${p.precio.toFixed(2)}</span>`;
+        // Price Logic
+        let priceHtml = '';
+        if (discount > 0) {
+            priceHtml = `
+                <div class="flex flex-col">
+                    <span class="text-xs text-gray-400 line-through">$${p.precio.toFixed(2)}</span>
+                    <span class="text-2xl font-black text-red-600">$${finalPrice.toFixed(2)}</span>
+                </div>
+            `;
+        } else {
+            priceHtml = `<span class="text-2xl font-black text-gray-900">$${p.precio.toFixed(2)}</span>`;
+        }
 
         card.innerHTML = `
       <div class="relative bg-gray-50 overflow-hidden" style="aspect-ratio: 1/1;">
@@ -293,8 +283,13 @@ function contactarWhatsApp(productId) {
     const producto = PRODUCTS.find((p) => p.id === productId);
     if (!producto) return;
 
-    // Precio sin descuento para el mensaje de WhatsApp
-    const precioTexto = `$${producto.precio.toFixed(2)}`;
+    const discount = typeof getProductDiscount === 'function' ? getProductDiscount(producto.id) : 0;
+    const finalPrice = typeof getDiscountedPrice === 'function' ? getDiscountedPrice(producto.id, producto.precio) : producto.precio;
+
+    let precioTexto = `$${producto.precio.toFixed(2)}`;
+    if (discount > 0) {
+        precioTexto = `$${finalPrice.toFixed(2)} (Oferta ${discount}% OFF - Antes $${producto.precio.toFixed(2)})`;
+    }
 
     const mensaje = encodeURIComponent(
         `Hola, estoy interesada(o) en este producto:\n\n` +
@@ -316,50 +311,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     applyFilters();
 });
-
-// ==============================
-// FUNCIONES GLOBALES PARA HTML
-// ==============================
-
-window.filterByCategory = function (category) {
-    const categorySelect = document.getElementById('categoryFilter');
-    if (categorySelect) {
-        categorySelect.value = category;
-        categorySelect.dispatchEvent(new Event('change'));
-    }
-
-    // Actualizar estado visual de los botones
-    const evt = window.event;
-    if (evt && evt.currentTarget) {
-        const clickedBtn = evt.currentTarget;
-        const container = clickedBtn.parentElement;
-
-        container.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        clickedBtn.classList.add('active');
-    }
-};
-
-window.filterByGender = function (gender) {
-    const genderSelect = document.getElementById('genderFilter');
-    if (genderSelect) {
-        genderSelect.value = gender;
-        genderSelect.dispatchEvent(new Event('change'));
-    }
-
-    // Actualizar estado visual de los botones
-    const evt = window.event;
-    if (evt && evt.currentTarget) {
-        const clickedBtn = evt.currentTarget;
-        const container = clickedBtn.parentElement;
-
-        container.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active', 'active-mujer', 'active-hombre');
-        });
-
-        if (gender === 'mujer') clickedBtn.classList.add('active-mujer');
-        else if (gender === 'hombre') clickedBtn.classList.add('active-hombre');
-        else clickedBtn.classList.add('active');
-    }
-};

@@ -5,15 +5,19 @@
   <meta charset="UTF-8" />
   <title>MoonLight - Premium Collection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+    rel="stylesheet">
+
   <!-- TailwindCSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
   <!-- Premium Custom Styles -->
   <link href="styles.css" rel="stylesheet" />
+
   <style>
     * {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -152,12 +156,14 @@
       background: rgba(0, 0, 0, 0.75);
     }
 
+    /* Responsive adjustments */
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2.5rem;
       }
     }
 
+    /* Animations */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -186,6 +192,31 @@
 </head>
 
 <body class="min-h-screen">
+
+  <!-- Flash Sale Banner -->
+  <div id="flashBanner" class="flash-banner hidden">
+    <h3 id="promotionTitle" class="text-xl font-black mb-1"></h3>
+    <p id="promotionMessage" class="text-sm opacity-90"></p>
+    <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <span class="countdown-value" id="days">00</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="hours">00</span>
+        <span class="countdown-label">Hrs</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="minutes">00</span>
+        <span class="countdown-label">Min</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="seconds">00</span>
+        <span class="countdown-label">Seg</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Header Premium -->
   <header
     class="sticky top-0 z-50 bg-white/85 backdrop-filter backdrop-blur-md border-b border-gray-200/50 shadow-sm transition-all duration-300">
@@ -194,31 +225,38 @@
         class="h-48 w-auto transform hover:scale-105 transition-transform duration-500" />
     </div>
   </header>
+
   <!-- Hero Section -->
   <section class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="text-center fade-in-up">
-        <h1 class="hero-title mb-6">DESCUBRE LA<br />NUEVA COLECCION</h1>
+        <h1 class="hero-title mb-6">
+          DESCUBRE LA<br />NUEVA COLECCIÃ“N
+        </h1>
       </div>
     </div>
   </section>
+
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
     <!-- Filters Section -->
     <section class="mb-12">
       <div class="flex flex-col space-y-8">
+
         <!-- Category Pills -->
         <div class="flex flex-wrap gap-3">
-          <h3 class="w-full text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Categorías</h3>
+          <h3 class="w-full text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">CategorÃ­as</h3>
           <button class="filter-btn active" onclick="filterByCategory('todas')">Todas</button>
           <button id="catRopa" class="filter-btn" onclick="filterByCategory('Ropa')">Ropa</button>
           <button id="catZapatos" class="filter-btn" onclick="filterByCategory('Zapatos')">Zapatos</button>
           <button id="catMaquillaje" class="filter-btn" onclick="filterByCategory('Maquillaje')">Maquillaje</button>
-          <button id="catPremium" class="filter-btn" onclick="filterByCategory('Premium')">Premium ✨</button>
+          <button id="catPremium" class="filter-btn" onclick="filterByCategory('Premium')">Premium </button>
         </div>
+
         <!-- Gender Filter -->
         <div>
-          <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Genero</h3>
+          <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Género</h3>
           <div class="flex flex-wrap gap-2">
             <button class="filter-btn active" onclick="filterByGender('todos')">Todos</button>
             <button class="filter-btn" onclick="filterByGender('mujer')">Mujer</button>
@@ -226,6 +264,7 @@
             <button class="filter-btn" onclick="filterByGender('unisex')">Unisex</button>
           </div>
         </div>
+
         <!-- Search Bar -->
         <div class="max-w-md">
           <div class="relative">
@@ -238,24 +277,32 @@
             </svg>
           </div>
         </div>
-        <!-- Hidden selects for compatibility -->
+
+        <!-- Advanced Filters (Hidden selects for compatibility) -->
         <div class="hidden">
           <select id="categoryFilter"></select>
           <select id="subcategoryFilter"></select>
           <select id="genderFilter"></select>
         </div>
+
       </div>
     </section>
+
     <!-- Product Count -->
     <div class="mb-8">
-      <h2 class="section-title">COLECCION</h2>
+      <h2 class="section-title">
+        ColecciÃ³n
+      </h2>
       <p id="productCount" class="text-gray-500 mt-2"></p>
     </div>
+
     <!-- Products Grid -->
     <section id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8">
       <!-- Products will be injected here -->
     </section>
+
   </main>
+
   <!-- Footer -->
   <footer class="bg-black text-white mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -264,29 +311,35 @@
       </div>
     </div>
   </footer>
+
   <!-- Modal -->
   <div id="productModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4"
     onclick="closeModal(event)">
     <div
       class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]"
       onclick="event.stopPropagation()">
+
       <button class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-gray-100 transition"
         onclick="closeModal()">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+
       <!-- Image -->
       <div class="w-full md:w-1/2 bg-gray-50 h-80 md:h-auto relative">
         <img id="modalImage" src="" alt="" class="w-full h-full object-contain p-8" />
       </div>
+
       <!-- Content -->
       <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col overflow-y-auto">
         <div class="mb-6">
           <p id="modalCategory" class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3"></p>
           <h3 id="modalTitle" class="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight"></h3>
         </div>
+
         <p id="modalDescription" class="text-gray-600 mb-8 leading-relaxed"></p>
+
         <div class="mt-auto pt-6 border-t border-gray-100">
           <div class="flex items-end justify-between mb-6">
             <div>
@@ -294,10 +347,11 @@
               <p id="modalPrice" class="text-4xl font-black"></p>
             </div>
           </div>
+
           <button id="modalWhatsappBtn"
             class="btn-premium w-full py-3 sm:py-4 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base">
             <span class="hidden sm:inline">CONSULTAR DISPONIBILIDAD</span>
-            <span class="inline sm:hidden">DISPONIBILIDAD</span>
+            <span class="inline sm:hidden">CONSULTAR VÃA WHATSAPP</span>
             <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -307,10 +361,74 @@
       </div>
     </div>
   </div>
+
   <!-- Scripts -->
   <script src="products.js"></script>
   <script src="promotions.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js"></script>`r`n
+
+  <!-- Helper functions for buttons -->
+  <script>
+    function filterByCategory(category) {
+      const categorySelect = document.getElementById('categoryFilter');
+      if (categorySelect) {
+        categorySelect.value = category;
+        categorySelect.dispatchEvent(new Event('change'));
+      }
+
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function filterByGender(gender) {
+      const genderButtons = event.target.parentElement.querySelectorAll('.filter-btn');
+      genderButtons.forEach(btn => {
+        btn.classList.remove('active', 'active-mujer', 'active-hombre');
+      });
+
+      if (gender === 'mujer') event.target.classList.add('active-mujer');
+      else if (gender === 'hombre') event.target.classList.add('active-hombre');
+      else event.target.classList.add('active');
+
+      const genderSelect = document.getElementById('genderFilter');
+      if (genderSelect) {
+        genderSelect.value = gender;
+        genderSelect.dispatchEvent(new Event('change'));
+      }
+    }
+
+    // Banner Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof isPromotionActive === 'function' && isPromotionActive()) {
+        const banner = document.getElementById('flashBanner');
+        const title = document.getElementById('promotionTitle');
+        const message = document.getElementById('promotionMessage');
+
+        if (banner && title && message && typeof PROMOTIONS !== 'undefined') {
+          banner.classList.remove('hidden');
+          title.textContent = PROMOTIONS.title;
+          message.textContent = PROMOTIONS.message;
+
+          setInterval(() => {
+            if (typeof getTimeRemaining === 'function') {
+              const time = getTimeRemaining();
+              if (time) {
+                document.getElementById('days').textContent = String(time.days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(time.hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(time.minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(time.seconds).padStart(2, '0');
+              }
+            }
+          }, 1000);
+        }
+      }
+    });
+  </script>
+
+
 </body>
 
 </html>

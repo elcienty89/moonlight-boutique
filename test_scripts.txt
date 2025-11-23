@@ -1,0 +1,4 @@
+﻿  <script src="products.js"></script>
+  <script src="promotions.js"></script>
+  <script src="script.js"></script>
+  <script src="gallery.js"></script>
