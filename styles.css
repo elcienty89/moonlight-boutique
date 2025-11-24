@@ -909,3 +909,36 @@ select {
     background: linear-gradient(135deg, #128C7E 0%, #075E54 100%) !important;
     transform: scale(0.98);
 }
+
+/* Mobile Optimization - Compact Filters */
+@media (max-width: 768px) {
+    /* Reduce spacing between filter sections */
+    main section.mb-12 {
+        margin-bottom: 2rem;
+    }
+    
+    main section.mb-12 > div {
+        gap: 1rem !important;
+    }
+    
+    /* Smaller filter titles */
+    main h3.text-sm {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Compact filter buttons */
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Reduce gap between buttons */
+    .flex-wrap.gap-3 {
+        gap: 0.5rem !important;
+    }
+    
+    .flex-wrap.gap-2 {
+        gap: 0.4rem !important;
+    }
+}
