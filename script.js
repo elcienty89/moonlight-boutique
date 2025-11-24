@@ -1,7 +1,84 @@
 // ==============================
-// CONFIGURACIÓN WHATSAPP
+// CONFIGURACIÓN: MONEDA
 // ==============================
-const WHATSAPP_NUMBER = "17866917005";
+const EXCHANGE_RATE_API = 'https://api.allorigins.win/get?url=https://eltoque.com/tasas-de-cambio-de-moneda-en-cuba-hoy';
+const DEFAULT_EXCHANGE_RATE = 435; // Updated to actual rate (CUP per USD)
+let currentExchangeRate = DEFAULT_EXCHANGE_RATE;
+
+// Intentar obtener la tasa real
+async function fetchExchangeRate() {
+    const cachedRate = localStorage.getItem('exchangeRate');
+    const cachedTime = localStorage.getItem('exchangeRateTime');
+
+    // Usar cache si tiene menos de 1 hora
+    if (cachedRate && cachedTime && (Date.now() - cachedTime < 3600000)) {
+        currentExchangeRate = parseFloat(cachedRate);
+        console.log('💰 Tasa USD (Cache):', currentExchangeRate);
+        updatePricesInDOM();
+        return;
+    }
+
+    try {
+        const response = await fetch(EXCHANGE_RATE_API);
+        const data = await response.json();
+
+        if (data.contents) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.contents, 'text/html');
+            const textContent = doc.body.textContent;
+
+            let foundRate = null;
+
+            // Patrón 1: "1 USD = 325 CUP" (Texto explícito)
+            const explicitMatch = textContent.match(/1\s*USD\s*=\s*(\d{3,4})\s*CUP/i);
+            if (explicitMatch) {
+                foundRate = parseFloat(explicitMatch[1]);
+            }
+
+            // Patrón 2: Buscar en celdas de tabla si el patrón 1 falla
+            if (!foundRate) {
+                const cells = doc.querySelectorAll('td, div, span');
+                for (let cell of cells) {
+                    if (cell.textContent.trim() === 'USD' || cell.textContent.includes('USD')) {
+                        const priceMatch = cell.textContent.match(/(\d{3,4})/);
+                        if (priceMatch) {
+                            const val = parseFloat(priceMatch[0]);
+                            if (val > 200 && val < 500) {
+                                foundRate = val;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (foundRate) {
+                currentExchangeRate = foundRate;
+                localStorage.setItem('exchangeRate', currentExchangeRate);
+                localStorage.setItem('exchangeRateTime', Date.now());
+                console.log('💰 Tasa USD (Actualizada - Mercado Informal):', currentExchangeRate);
+                updatePricesInDOM();
+            } else {
+                console.warn('⚠️ No se pudo extraer una tasa válida, usando defecto:', DEFAULT_EXCHANGE_RATE);
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error obteniendo tasa de cambio:', error);
+    }
+}
+
+function updatePricesInDOM() {
+    document.querySelectorAll('.price-display').forEach(el => {
+        const usdPrice = parseFloat(el.dataset.usdPrice);
+        if (!isNaN(usdPrice)) {
+            const cupPrice = Math.round(usdPrice * currentExchangeRate);
+            el.innerHTML = `$${usdPrice.toFixed(2)} <span class="text-sm text-gray-500 font-normal">(~${cupPrice} CUP)</span>`;
+        }
+    });
+}
+
+// Inicializar tasa
+fetchExchangeRate();
 
 // ==============================
 // MODAL LOGIC
@@ -28,16 +105,22 @@ function openModal(productId) {
     // CREATE GALLERY THUMBNAILS HERE
     createGalleryThumbnails(p);
 
-    // Mostrar siempre el precio sin descuento
-    modalPrice.textContent = `$${p.precio.toFixed(2)}`;
+    // Mostrar precios
+    const cupPrice = Math.round(p.precio * currentExchangeRate);
+    modalPrice.innerHTML = `<span class="price-display" data-usd-price="${p.precio}">$${p.precio.toFixed(2)} <span class="text-lg text-gray-500 font-normal">(~${cupPrice} CUP)</span></span>`;
 
     // Configurar botón de WhatsApp del modal
     modalWhatsappBtn.onclick = () => contactarWhatsApp(p.id);
 
     // Store product images for lightbox navigation
     const imageContainer = modalImage.parentElement;
-    if (imageContainer && p.imagenes) {
-        imageContainer.dataset.productImages = JSON.stringify(p.imagenes);
+    if (imageContainer) {
+        const images = p.imagenes && p.imagenes.length > 0 ? p.imagenes : [p.imagen];
+        imageContainer.dataset.productImages = JSON.stringify(images);
+    }
+
+    if (window.setupModalImageClick) {
+        window.setupModalImageClick();
     }
 
     modal.classList.remove("hidden");
@@ -266,7 +349,8 @@ function renderProducts(list) {
         }
 
         // Price Logic (sin descuentos)
-        let priceHtml = `<span class="text-2xl font-black text-gray-900">$${p.precio.toFixed(2)}</span>`;
+        let cupPrice = Math.round(p.precio * currentExchangeRate);
+        let priceHtml = `<span class="price-display text-2xl font-black text-gray-900" data-usd-price="${p.precio}">$${p.precio.toFixed(2)} <span class="text-sm text-gray-500 font-normal">(~${cupPrice} CUP)</span></span>`;
 
         card.innerHTML = `
       <div class="relative bg-gray-50 overflow-hidden" style="aspect-ratio: 1/1;">
