@@ -34,6 +34,12 @@ function openModal(productId) {
     // Configurar botón de WhatsApp del modal
     modalWhatsappBtn.onclick = () => contactarWhatsApp(p.id);
 
+    // Store product images for lightbox navigation
+    const imageContainer = modalImage.parentElement;
+    if (imageContainer && p.imagenes) {
+        imageContainer.dataset.productImages = JSON.stringify(p.imagenes);
+    }
+
     modal.classList.remove("hidden");
     modal.classList.add("flex");
 }
