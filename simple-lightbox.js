@@ -172,13 +172,7 @@
         const imageContainer = modalImage.parentElement;
         if (!imageContainer) return;
 
-        // Add zoom indicator
-        if (!imageContainer.querySelector('.modal-image-zoom-indicator')) {
-            const indicator = document.createElement('div');
-            indicator.className = 'modal-image-zoom-indicator';
-            indicator.innerHTML = '🔍';
-            imageContainer.appendChild(indicator);
-        }
+        // Zoom indicator removed as per user request
 
         // Make container clickable
         imageContainer.style.cursor = 'zoom-in';
@@ -299,5 +293,8 @@
             }
         }
     });
+
+    // Expose setup function
+    window.setupModalImageClick = addClickHandlerToModalImage;
 
 })();

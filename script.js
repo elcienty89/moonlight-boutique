@@ -134,11 +134,15 @@ function createGalleryThumbnails(product) {
 
     if (!imageContainer) return;
 
+    // Remove existing arrows if any (to prevent duplicates)
+    const existingArrows = imageContainer.querySelectorAll('.gallery-arrow');
+    existingArrows.forEach(arrow => arrow.remove());
+
     // Create container if doesn't exist
     if (!thumbnailsContainer) {
         thumbnailsContainer = document.createElement('div');
         thumbnailsContainer.id = 'modalThumbnails';
-        thumbnailsContainer.style.cssText = 'position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap: 8px; padding: 8px; background: rgba(0,0,0,0.6); border-radius: 8px; backdrop-filter: blur(8px);';
+        thumbnailsContainer.style.cssText = 'position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap: 8px; padding: 8px; background: rgba(0,0,0,0.6); border-radius: 8px; backdrop-filter: blur(8px); z-index: 20;';
         imageContainer.appendChild(thumbnailsContainer);
     }
 
@@ -154,42 +158,89 @@ function createGalleryThumbnails(product) {
     // Show and populate thumbnails
     thumbnailsContainer.style.display = 'flex';
 
+    let currentImageIndex = 0;
+
+    // Function to update image and active state
+    const updateGalleryState = (index) => {
+        currentImageIndex = index;
+        const imgUrl = product.imagenes[index];
+
+        // Fade out
+        modalImage.style.opacity = '0';
+        setTimeout(() => {
+            modalImage.src = imgUrl;
+            modalImage.style.opacity = '1';
+        }, 200);
+
+        // Update thumbnails styling
+        const thumbs = thumbnailsContainer.querySelectorAll('img');
+        thumbs.forEach((t, i) => {
+            if (i === index) {
+                t.style.borderColor = 'white';
+                t.style.opacity = '1';
+                t.style.transform = 'scale(1.1)';
+            } else {
+                t.style.borderColor = 'transparent';
+                t.style.opacity = '0.7';
+                t.style.transform = 'scale(1)';
+            }
+        });
+    };
+
+    // Create Thumbnails
     product.imagenes.forEach((img, i) => {
         const thumb = document.createElement('img');
         thumb.src = img;
         thumb.style.cssText = `width: 48px; height: 48px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid ${i === 0 ? 'white' : 'transparent'}; transition: all 0.3s; opacity: ${i === 0 ? '1' : '0.7'};`;
 
         thumb.onmouseover = function () {
-            this.style.transform = 'scale(1.1)';
-            if (this.style.borderColor !== 'white') this.style.opacity = '1';
+            if (i !== currentImageIndex) {
+                this.style.transform = 'scale(1.1)';
+                this.style.opacity = '1';
+            }
         };
 
         thumb.onmouseout = function () {
-            this.style.transform = 'scale(1)';
-            if (this.style.borderColor !== 'white') this.style.opacity = '0.7';
+            if (i !== currentImageIndex) {
+                this.style.transform = 'scale(1)';
+                this.style.opacity = '0.7';
+            }
         };
 
         thumb.onclick = function () {
-            // Fade out
-            modalImage.style.opacity = '0';
-            setTimeout(() => {
-                modalImage.src = img;
-                modalImage.style.opacity = '1';
-            }, 200);
-
-            // Update thumbnail borders
-            thumbnailsContainer.querySelectorAll('img').forEach(t => {
-                t.style.borderColor = 'transparent';
-                t.style.opacity = '0.7';
-            });
-            this.style.borderColor = 'white';
-            this.style.opacity = '1';
+            updateGalleryState(i);
         };
 
         thumbnailsContainer.appendChild(thumb);
     });
 
-    console.log('✅ Gallery created with', product.imagenes.length, 'images');
+    // Create Arrows
+    const createArrow = (direction) => {
+        const btn = document.createElement('button');
+        // Increased z-index to 50, made background darker and solid for visibility
+        btn.className = `gallery-arrow absolute top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg transition-all duration-300 z-50 hover:bg-black ${direction === 'prev' ? 'left-2' : 'right-2'}`;
+        btn.innerHTML = direction === 'prev'
+            ? '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>'
+            : '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
+
+        btn.onclick = (e) => {
+            e.preventDefault(); // Prevent default action
+            e.stopPropagation(); // Stop event bubbling
+            if (direction === 'prev') {
+                const newIndex = (currentImageIndex - 1 + product.imagenes.length) % product.imagenes.length;
+                updateGalleryState(newIndex);
+            } else {
+                const newIndex = (currentImageIndex + 1) % product.imagenes.length;
+                updateGalleryState(newIndex);
+            }
+        };
+        return btn;
+    };
+
+    imageContainer.appendChild(createArrow('prev'));
+    imageContainer.appendChild(createArrow('next'));
+
+    console.log('✅ Gallery created with arrows for', product.imagenes.length, 'images');
 }
 
 function closeModal(event) {

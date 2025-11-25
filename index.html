@@ -188,17 +188,17 @@
 <body class="min-h-screen">
   <!-- Header Premium -->
   <header
-    class="sticky top-0 z-50 bg-white/85 backdrop-filter backdrop-blur-md border-b border-gray-200/50 shadow-sm transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col items-center justify-center">
-      <img src="images/logo.png" alt="Logo MoonLight"
-        class="h-48 w-auto transform hover:scale-105 transition-transform duration-500" />
+    class="sticky top-0 z-50 bg-white/85 backdrop-filter backdrop-blur-md border-b border-gray-200/50 shadow-sm transition-all duration-300 h-20">
+    <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-center">
+      <img src="images/logo.png" alt="Logo MoonLight" style="height: 72px;"
+        class="w-auto transform hover:scale-105 transition-transform duration-500" />
     </div>
   </header>
   <!-- Hero Section -->
   <section class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="text-center fade-in-up">
-        <h1 class="hero-title mb-6">DESCUBRE LA<br />NUEVA COLECCION</h1>
+        <h1 class="hero-title mb-6">DESCUBRE LA<br />NUEVA COLECCIÓN</h1>
       </div>
     </div>
   </section>
@@ -265,10 +265,10 @@
     </div>
   </footer>
   <!-- Modal -->
-  <div id="productModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4"
+  <div id="productModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-2 sm:p-4"
     onclick="closeModal(event)">
     <div
-      class="bg-white rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]"
+      class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[85vh] sm:max-h-[90vh] my-4"
       onclick="event.stopPropagation()">
       <button class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-gray-100 transition"
         onclick="closeModal()">
@@ -277,21 +277,22 @@
         </svg>
       </button>
       <!-- Image -->
-      <div class="w-full md:w-1/2 bg-gray-50 h-80 md:h-auto relative">
-        <img id="modalImage" src="" alt="" class="w-full h-full object-contain p-8" />
+      <div class="w-full md:w-1/2 bg-gray-50 h-64 sm:h-80 md:h-auto relative">
+        <img id="modalImage" src="" alt="" class="w-full h-full object-contain p-4 sm:p-8" />
       </div>
       <!-- Content -->
-      <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col overflow-y-auto">
-        <div class="mb-6">
-          <p id="modalCategory" class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3"></p>
-          <h3 id="modalTitle" class="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight"></h3>
+      <div class="w-full md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col overflow-y-auto">
+        <div class="mb-4 sm:mb-6">
+          <p id="modalCategory" class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 sm:mb-3"></p>
+          <h3 id="modalTitle"
+            class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 sm:mb-4 leading-tight"></h3>
         </div>
-        <p id="modalDescription" class="text-gray-600 mb-8 leading-relaxed"></p>
-        <div class="mt-auto pt-6 border-t border-gray-100">
-          <div class="flex items-end justify-between mb-6">
+        <p id="modalDescription" class="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed"></p>
+        <div class="mt-auto pt-4 sm:pt-6 border-t border-gray-100">
+          <div class="flex items-end justify-between mb-4 sm:mb-6">
             <div>
               <p class="text-xs text-gray-500 uppercase mb-1">Precio</p>
-              <p id="modalPrice" class="text-4xl font-black"></p>
+              <p id="modalPrice" class="text-3xl sm:text-4xl font-black"></p>
             </div>
           </div>
           <button id="modalWhatsappBtn"
@@ -310,7 +311,7 @@
   <!-- Scripts -->
   <script src="products.js"></script>
   <script src="promotions.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
   <script src="simple-lightbox.js"></script>
 </body>
 
