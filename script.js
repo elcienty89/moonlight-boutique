@@ -8,7 +8,8 @@ let currentExchangeRate = DEFAULT_EXCHANGE_RATE;
 // ==============================
 // CONFIGURACIÓN: WHATSAPP
 // ==============================
-const WHATSAPP_NUMBER = '12363009006'; // Tu número de WhatsApp con código de país
+const WHATSAPP_NUMBER = '17866917005'; // Tu número de WhatsApp con código de país
+
 
 
 // Intentar obtener la tasa real
