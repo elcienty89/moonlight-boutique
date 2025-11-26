@@ -5,13 +5,6 @@ const EXCHANGE_RATE_API = 'https://api.allorigins.win/get?url=https://eltoque.co
 const DEFAULT_EXCHANGE_RATE = 435; // Updated to actual rate (CUP per USD)
 let currentExchangeRate = DEFAULT_EXCHANGE_RATE;
 
-// ==============================
-// CONFIGURACIÓN: WHATSAPP
-// ==============================
-const WHATSAPP_NUMBER = '17866917005'; // Tu número de WhatsApp con código de país
-
-
-
 // Intentar obtener la tasa real
 async function fetchExchangeRate() {
     const cachedRate = localStorage.getItem('exchangeRate');

@@ -39,58 +39,97 @@ console.log('✅ Gallery.js loaded successfully!');
     function addGalleryToModal(product) {
         let thumbnailsContainer = document.getElementById('modalThumbnails');
         const modalImage = document.getElementById('modalImage');
+        const imageContainer = modalImage ? modalImage.parentElement : null;
 
-        if (!modalImage) return;
+        if (!imageContainer) return;
 
-        // Create thumbnails container if it doesn't exist
+        // --- 1. Create/Reset Thumbnails Container ---
         if (!thumbnailsContainer) {
-            const imageContainer = modalImage.parentElement;
-            if (!imageContainer) return;
-
             thumbnailsContainer = document.createElement('div');
             thumbnailsContainer.id = 'modalThumbnails';
-            thumbnailsContainer.className = 'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-row gap-2 p-2 bg-black/50 rounded-lg backdrop-blur-sm';
+            thumbnailsContainer.className = 'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-row gap-2 p-2 bg-black/50 rounded-lg backdrop-blur-sm z-20';
             imageContainer.appendChild(thumbnailsContainer);
         }
-
-        // Clear previous thumbnails
         thumbnailsContainer.innerHTML = '';
 
-        // If only one image, hide thumbnails container
+        // Remove existing arrows if any (to prevent duplicates on re-open)
+        const existingArrows = imageContainer.querySelectorAll('.gallery-arrow');
+        existingArrows.forEach(arrow => arrow.remove());
+
+        // If only one image, hide everything and return
         if (!product.imagenes || product.imagenes.length <= 1) {
             thumbnailsContainer.style.display = 'none';
             return;
         }
 
-        // Show thumbnails container
         thumbnailsContainer.style.display = 'flex';
+        let currentImageIndex = 0;
 
-        // Add thumbnails
+        // --- 2. Create Arrows ---
+        const createArrow = (direction) => {
+            const btn = document.createElement('button');
+            btn.className = `gallery-arrow absolute top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-sm transition-all duration-300 z-20 ${direction === 'prev' ? 'left-2' : 'right-2'}`;
+            btn.innerHTML = direction === 'prev'
+                ? '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>'
+                : '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
+
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                if (direction === 'prev') {
+                    currentImageIndex = (currentImageIndex - 1 + product.imagenes.length) % product.imagenes.length;
+                } else {
+                    currentImageIndex = (currentImageIndex + 1) % product.imagenes.length;
+                }
+                updateGalleryState(currentImageIndex);
+            };
+            return btn;
+        };
+
+        imageContainer.appendChild(createArrow('prev'));
+        imageContainer.appendChild(createArrow('next'));
+
+        // --- 3. Update Function ---
+        const updateGalleryState = (index) => {
+            const imgUrl = product.imagenes[index];
+
+            // Fade effect
+            modalImage.style.opacity = '0';
+            setTimeout(() => {
+                modalImage.src = imgUrl;
+                modalImage.style.opacity = '1';
+            }, 200);
+
+            // Update thumbnails styling
+            const thumbs = thumbnailsContainer.querySelectorAll('img');
+            thumbs.forEach((t, i) => {
+                if (i === index) {
+                    t.classList.remove('border-transparent');
+                    t.classList.add('border-white');
+                    t.style.opacity = '1';
+                } else {
+                    t.classList.remove('border-white');
+                    t.classList.add('border-transparent');
+                    t.style.opacity = '0.7';
+                }
+            });
+
+            currentImageIndex = index;
+        };
+
+        // --- 4. Create Thumbnails ---
         product.imagenes.forEach((img, i) => {
             const thumb = document.createElement('img');
             thumb.src = img;
-            thumb.className = `w-12 h-12 object-cover rounded cursor-pointer border-2 transition-all duration-300 hover:scale-110 ${i === 0 ? 'border-white' : 'border-transparent hover:border-white/50'}`;
+            thumb.className = `w-12 h-12 object-cover rounded cursor-pointer border-2 transition-all duration-300 hover:scale-110 ${i === 0 ? 'border-white opacity-100' : 'border-transparent hover:border-white/50 opacity-70'}`;
 
-            thumb.onclick = function () {
-                // Update main image with fade effect
-                modalImage.style.opacity = '0';
-                setTimeout(() => {
-                    modalImage.src = img;
-                    modalImage.style.opacity = '1';
-                }, 200);
-
-                // Update active state  
-                thumbnailsContainer.querySelectorAll('img').forEach(t => {
-                    t.classList.remove('border-white');
-                    t.classList.add('border-transparent');
-                });
-                this.classList.remove('border-transparent');
-                this.classList.add('border-white');
+            thumb.onclick = (e) => {
+                e.stopPropagation();
+                updateGalleryState(i);
             };
 
             thumbnailsContainer.appendChild(thumb);
         });
 
-        console.log('✅ Gallery created with', product.imagenes.length, 'images');
+        console.log('✅ Gallery created with arrows for', product.imagenes.length, 'images');
     }
 })();

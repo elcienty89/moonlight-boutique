@@ -1,4 +1,11 @@
 // ==============================
+// CONFIGURACIÓN: WHATSAPP
+// ==============================
+// Cambia este número por tu número de WhatsApp (formato internacional sin +)
+// Ejemplo: para Cuba +53 5XXXXXXX sería "535XXXXXXX"
+const WHATSAPP_NUMBER = "17866917005"; // ⚠️ CAMBIAR POR TU NÚMERO REAL
+
+// ==============================
 // CONFIGURACIÓN: TUS PRODUCTOS
 // ==============================
 // Modifica este array para añadir / quitar / editar productos.
@@ -232,6 +239,40 @@ const PRODUCTS = [
         tallas: ["XL"],
         colores: ["Naranja"],
         estilos: ["Deportivo", "Casual", "Cómodo"],
+        disponible: true,
+    },
+
+    // ============================
+    // PREMIUM - ACCESORIOS
+    // ============================
+    {
+        id: 28,
+        nombre: "Bolso Deportivo Unisex 40L Under Armour Storm",
+        categoria: "Premium",
+        subcategoria: "Bolsos",
+        genero: "unisex",
+        precio: 40.00,
+        descripcion: "Bolso deportivo de alta resistencia con tecnología UA Storm repelente al agua. Capacidad: 40 Libras. Dimensiones: 10.6\"Ancho x 10.1\"Alto x 21.7\"Largo. Paneles inferiores y laterales resistentes con recubrimiento PU y forro de espuma. Incluye bolsillo ventilado para ropa sucia o zapatos. Bolsillo doble para botellas de agua, puntos de sujeción webbing molle y correa de hombro ajustable.",
+        imagen: "images/bolso_deportivo_2.png",
+        imagenes: ["images/bolso_deportivo_2.png", "images/bolso_deportivo_1.png", "images/bolso_deportivo_3.png", "images/bolso_deportivo_4.png", "images/bolso_deportivo_5.png"],
+        tallas: ["Única"],
+        colores: ["Negro"],
+        estilos: ["Deportivo", "Resistente", "Funcional"],
+        disponible: true,
+    },
+    {
+        id: 29,
+        nombre: "Conjunto Deportivo Under Armour Negro - Talla L",
+        categoria: "Premium",
+        subcategoria: "Conjuntos",
+        genero: "hombre",
+        precio: 45.00,
+        descripcion: "Conjunto deportivo premium de dos piezas (chaqueta y pantalón) en color negro. Diseño moderno, cómodo y de alta calidad. Ideal para entrenamiento o uso casual.",
+        imagen: "images/tracksuit_black_1.png",
+        imagenes: ["images/tracksuit_black_1.png", "images/tracksuit_black_2.png", "images/tracksuit_black_3.png"],
+        tallas: ["M", "L", "XL"],
+        colores: ["Negro"],
+        estilos: ["Deportivo", "Premium", "Casual"],
         disponible: true,
     },
 ];
