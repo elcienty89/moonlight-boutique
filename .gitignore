@@ -24,4 +24,21 @@ Thumbs.db
 .env.local
 .env.*.local
 
-backup*
+# Backups (no necesarios en producción)
+backup*/
+*_backup*.html
+index_temp.html
+
+# Scripts de PowerShell (herramientas de desarrollo)
+*.ps1
+
+# Python scripts (herramientas de desarrollo)
+*.py
+
+# Archivos de texto de desarrollo
+test_scripts.txt
+
+# Archivos markdown de guías (opcional mantener README.md)
+COMO_PUBLICAR.md
+GUIA_GITHUB_NETLIFY.md
+GUIA_RAPIDA_ACTUALIZACION.md
