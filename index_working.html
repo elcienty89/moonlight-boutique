@@ -183,148 +183,6 @@
       background-position: right 1rem center;
       padding-right: 2.5rem;
     }
-
-    /* ============================== */
-    /* CINTA DE LOGOS (FULL WIDTH)   */
-    /* ============================== */
-
-    /* Wrapper: rompe el max-width y usa todo el viewport */
-    .brand-carousel-wrapper {
-      position: relative;
-      width: 100vw;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      overflow: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-      padding: 1rem 0;
-    }
-
-    .brand-track-logos {
-      display: inline-flex;
-      align-items: center;
-      gap: 4rem;
-      width: max-content;
-      animation: scroll-logos 50s linear infinite;
-    }
-
-    .brand-track-logos:hover {
-      animation-play-state: running;
-    }
-
-    .brand-item-logo {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand-item-logo img {
-      height: 60px;
-      width: auto;
-      object-fit: contain;
-      opacity: 0.7;
-      filter: brightness(0) invert(1);
-      transition: all 0.3s ease;
-    }
-
-    .brand-item-logo img:hover {
-      opacity: 0.7;
-      transform: none;
-      filter: brightness(0) invert(1);
-    }
-
-    @keyframes scroll-logos {
-      0% {
-        transform: translateX(-50%);
-      }
-
-      100% {
-        transform: translateX(0%);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .brand-item-logo img {
-        height: 40px;
-      }
-
-      .brand-track-logos {
-        gap: 2rem;
-      }
-    }
-
-    /* ============================== */
-    /* CINTA DE MARCAS (TEXTO)       */
-    /* ============================== */
-
-    .brand-carousel {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .brand-track {
-      display: flex;
-      gap: 4rem;
-      animation: scroll 50s linear infinite;
-      width: max-content;
-    }
-
-    .brand-track:hover {
-      animation-play-state: running;
-    }
-
-    .brand-item {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .brand-text {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: liquidFlow 8s ease infinite;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-      opacity: 0.7;
-      filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
-    }
-
-    .brand-item:hover .brand-text {
-      opacity: 0.7;
-      transform: none;
-      filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .brand-text {
-        font-size: 1.2rem;
-      }
-
-      .brand-track {
-        gap: 3rem;
-      }
-    }
   </style>
 </head>
 
@@ -337,109 +195,14 @@
         class="w-auto transform hover:scale-105 transition-transform duration-500" />
     </div>
   </header>
-
   <!-- Hero Section -->
   <section class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="text-center fade-in-up">
         <h1 class="hero-title mb-6">DESCUBRE LA<br />NUEVA COLECCIÓN</h1>
       </div>
-
-      <!-- Cinta de Logos (Imágenes) - FULL WIDTH -->
-      <div class="brand-carousel-wrapper py-4 mb-8">
-        <div class="brand-track-logos">
-          <!-- Grupo 1 de Logos -->
-          <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
-          <div class="brand-item-logo"><img src="images/brands/aldo.png" alt="Aldo"></div>
-          <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
-          <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
-          <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
-          <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
-          <div class="brand-item-logo"><img src="images/brands/juicy-couture.png" alt="Juicy Couture"></div>
-          <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
-          <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
-          <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
-          <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
-          <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
-          <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
-          <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
-          <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
-          <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
-          <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
-          <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
-          <div class="brand-item-logo"><img src="images/brands/Burberry-Logo.png" alt="Burberry"></div>
-          <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
-          <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
-          <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
-          <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
-          <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
-          <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
-          <!-- Grupo 2 (Duplicado para efecto infinito) -->
-          <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
-          <div class="brand-item-logo"><img src="images/brands/aldo.png" alt="Aldo"></div>
-          <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
-          <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
-          <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
-          <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
-          <div class="brand-item-logo"><img src="images/brands/juicy-couture.png" alt="Juicy Couture"></div>
-          <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
-          <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
-          <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
-          <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
-          <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
-          <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
-          <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
-          <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
-          <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
-          <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
-          <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
-          <div class="brand-item-logo"><img src="images/brands/Burberry-Logo.png" alt="Burberry"></div>
-          <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
-          <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
-          <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
-          <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
-          <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
-          <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
-        </div>
-      </div>
-
-      <!-- Cinta de texto de marcas -->
-      <div class="brand-track">
-        <!-- Primer grupo de logos -->
-        <div class="brand-item"><span class="brand-text">SHEIN</span></div>
-        <div class="brand-item"><span class="brand-text">NIKE</span></div>
-        <div class="brand-item"><span class="brand-text">ADIDAS</span></div>
-        <div class="brand-item"><span class="brand-text">PUMA</span></div>
-        <div class="brand-item"><span class="brand-text">UNDER ARMOUR</span></div>
-        <div class="brand-item"><span class="brand-text">ZARA</span></div>
-        <div class="brand-item"><span class="brand-text">GUCCI</span></div>
-        <div class="brand-item"><span class="brand-text">CHANEL</span></div>
-        <div class="brand-item"><span class="brand-text">LOUIS VUITTON</span></div>
-        <div class="brand-item"><span class="brand-text">H&M</span></div>
-        <div class="brand-item"><span class="brand-text">M.A.C</span></div>
-        <div class="brand-item"><span class="brand-text">FOREVER 21</span></div>
-        <div class="brand-item"><span class="brand-text">VERSACE</span></div>
-        <div class="brand-item"><span class="brand-text">FENDI</span></div>
-        <div class="brand-item"><span class="brand-text">BURBERRY</span></div>
-        <div class="brand-item"><span class="brand-text">BALENCIAGA</span></div>
-        <div class="brand-item"><span class="brand-text">HERMES</span></div>
-        <div class="brand-item"><span class="brand-text">VALENTINO</span></div>
-        <div class="brand-item"><span class="brand-text">DOLCE & GABBANA</span></div>
-        <div class="brand-item"><span class="brand-text">MOSCHINO</span></div>
-        <div class="brand-item"><span class="brand-text">KENZO</span></div>
-        <div class="brand-item"><span class="brand-text">MONCLER</span></div>
-        <div class="brand-item"><span class="brand-text">BALMAIN</span></div>
-        <div class="brand-item"><span class="brand-text">VALENTINO</span></div>
-        <div class="brand-item"><span class="brand-text">BURBERRY</span></div>
-        <div class="brand-item"><span class="brand-text">CHRISTIAN DIOR</span></div>
-      </div>
     </div>
   </section>
-
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
     <!-- Filters Section -->
@@ -460,7 +223,7 @@
           class="hidden w-full mt-3 p-3 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-xl backdrop-blur-sm fade-in-up">
           <p class="text-sm text-indigo-200 font-medium text-center flex items-center justify-center gap-2">
             <span class="text-lg">🎊</span>
-            Todas las marcas dentro de la Categoria (Premium✨) son marcas 100% originales y registradas por codigos
+            Todas las marcas dentro de la Categoria (Premium✨) son marcas 100% originales y registradas por codigos✨
             <span class="text-lg">🎊</span>
           </p>
         </div>
@@ -494,19 +257,16 @@
         </div>
       </div>
     </section>
-
     <!-- Product Count -->
     <div class="mb-8">
       <h2 class="section-title">COLECCIÓN</h2>
       <p id="productCount" class="text-gray-500 mt-2"></p>
     </div>
-
     <!-- Products Grid -->
     <section id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8">
       <!-- Products will be injected here -->
     </section>
   </main>
-
   <!-- Footer -->
   <footer class="bg-black text-white mt-20 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -515,12 +275,11 @@
       </div>
     </div>
   </footer>
-
   <!-- Modal -->
   <div id="productModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-2 sm:p-4"
     onclick="closeModal(event)">
     <div
-      class="bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[85vh] sm:max-h[90vh] my-4 border border-gray-800"
+      class="bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden relative flex flex-col md:flex-row max-h-[85vh] sm:max-h-[90vh] my-4 border border-gray-800"
       onclick="event.stopPropagation()">
       <button class="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition"
         onclick="closeModal()">
@@ -560,7 +319,6 @@
       </div>
     </div>
   </div>
-
   <!-- Scripts -->
   <script src="products.js"></script>
   <script src="promotions.js"></script>
