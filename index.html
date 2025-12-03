@@ -651,38 +651,42 @@
   <!--  MÓDULO TASAS DE HOY   -->
   <!-- ====================== -->
   <!-- MÓDULO TASAS – MODELO 1 -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
-  <h2 class="text-center text-2xl sm:text-3xl font-extrabold mb-6 tracking-tight">
-    Tasas de hoy
-  </h2>
+<!-- MÓDULO TASAS – MODELO 2 -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+  <div
+    class="relative px-4 sm:px-6 py-3 rounded-3xl bg-white/4 backdrop-blur-2xl border border-white/10 shadow-[0_0_25px_rgba(0,0,0,0.9)] flex items-center justify-between gap-4 flex-wrap">
 
-  <div class="flex justify-center gap-6 flex-wrap">
+    <div class="absolute inset-0 rounded-3xl pointer-events-none"
+         style="background: linear-gradient(90deg, rgba(102,126,234,0.35), rgba(118,75,162,0.25), transparent); opacity: 0.9;"></div>
 
-    <!-- USD -->
-    <div
-      class="relative px-6 py-4 w-40 flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-      <div class="absolute inset-0 rounded-3xl pointer-events-none"
-           style="background: radial-gradient(circle at 0 0, rgba(102,126,234,0.4), transparent 55%); opacity: 0.7;"></div>
-      <img src="https://flagcdn.com/w40/us.png" alt="USD" class="mb-2 rounded-sm relative z-10">
-      <span class="text-gray-200 text-xs font-semibold tracking-[0.18em] uppercase relative z-10">USD</span>
-      <span id="usd-cup" class="text-2xl font-black mt-2 relative z-10">–</span>
+    <div class="relative z-10 flex items-center gap-2">
+      <span class="text-xs uppercase tracking-[0.2em] text-gray-300">Tasas de hoy</span>
     </div>
 
-    <!-- EUR -->
-    <div
-      class="relative px-6 py-4 w-40 flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-      <div class="absolute inset-0 rounded-3xl pointer-events-none"
-           style="background: radial-gradient(circle at 100% 0, rgba(244,143,255,0.4), transparent 55%); opacity: 0.7;"></div>
-      <img src="https://flagcdn.com/w40/eu.png" alt="EUR" class="mb-2 rounded-sm relative z-10">
-      <span class="text-gray-200 text-xs font-semibold tracking-[0.18em] uppercase relative z-10">EUR</span>
-      <span id="eur-cup" class="text-2xl font-black mt-2 relative z-10">–</span>
+    <div class="relative z-10 flex items-center gap-6 flex-wrap text-sm">
+
+      <!-- USD -->
+      <div class="flex items-center gap-2">
+        <img src="https://flagcdn.com/w24/us.png" class="rounded-sm">
+        <span class="text-gray-300 text-xs">USD</span>
+        <span id="usd-cup" class="font-semibold text-white text-sm">–</span>
+      </div>
+
+      <!-- Separador -->
+      <span class="h-4 w-px bg-white/25 hidden sm:inline-block"></span>
+
+      <!-- EUR -->
+      <div class="flex items-center gap-2">
+        <img src="https://flagcdn.com/w24/eu.png" class="rounded-sm">
+        <span class="text-gray-300 text-xs">EUR</span>
+        <span id="eur-cup" class="font-semibold text-white text-sm">–</span>
+      </div>
     </div>
 
+    <div class="relative z-10 text-[0.65rem] text-gray-400 ml-auto">
+      <span id="fecha-tasas">–</span>
+    </div>
   </div>
-
-  <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">
-    Actualizado: <span id="fecha-tasas">–</span>
-  </p>
 </section>
   <!-- FIN MÓDULO TASAS -->
 
