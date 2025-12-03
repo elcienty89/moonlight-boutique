@@ -321,8 +321,8 @@
 
     .reviews-toggle {
       position: fixed;
-      left: 1rem;                     /* Pegado a la izquierda */
-      top: 1.3rem;                    /* Anclado en la barra superior */
+      left: 1rem;
+      top: 1.3rem;
       z-index: 60;
       cursor: pointer;
       padding: 0.45rem;
@@ -353,7 +353,6 @@
       transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
     }
 
-    /* 3 barras verticales una al lado de la otra (cerrado) */
     .reviews-bar:nth-child(1) {
       transform: translateX(-6px);
     }
@@ -366,7 +365,6 @@
       transform: translateX(6px);
     }
 
-    /* Estado X cuando está abierta la barra lateral */
     body.reviews-open .reviews-bar:nth-child(1) {
       transform: rotate(45deg);
       height: 22px;
@@ -381,7 +379,6 @@
       height: 22px;
     }
 
-    /* Sidebar lateral transparente con blur */
     .reviews-sidebar {
       position: fixed;
       inset: 0 auto 0 0;
@@ -402,7 +399,6 @@
       transform: translateX(0);
     }
 
-    /* Overlay para oscurecer el fondo al abrir reseñas */
     .reviews-overlay {
       position: fixed;
       inset: 0;
@@ -418,7 +414,6 @@
       pointer-events: auto;
     }
 
-    /* Contenido interno del sidebar */
     .reviews-sidebar-header {
       margin-bottom: 1rem;
     }
@@ -511,49 +506,55 @@
 
   <!-- Sidebar de reseñas -->
   <aside class="reviews-sidebar" aria-label="Panel lateral MoonLight">
-  <div class="reviews-list">
-    <!-- PROXIMAMENTE -->
-    <article class="reviews-card">
-      <div class="reviews-card-header">
-        <span class="reviews-name">PROXIMAMENTE 🔜</span>
-      </div>
-      <p class="reviews-text">
-        Este espacio tendrá un apartado para reseñas de los clientes, donde acumularán (Lunas) ִֶָ☾ y tendrán la oportunidad de canjearlas por un regalo en su próxima compra y podrán ver cuantos habrán disponibles en el momento de recibirlos y escoger el que prefieran.
-      </p>
-    </article>
+    <div class="reviews-list">
+      <!-- PROXIMAMENTE -->
+      <article class="reviews-card">
+        <div class="reviews-card-header">
+          <span class="reviews-name">PROXIMAMENTE 🔜</span>
+        </div>
+        <p class="reviews-text">
+          Este espacio tendrá un apartado para reseñas de los clientes, donde acumularán (Lunas) ִֶָ☾ y tendrán la
+          oportunidad de canjearlas por un regalo en su próxima compra y podrán ver cuantos habrán disponibles en el
+          momento de recibirlos y escoger el que prefieran.
+        </p>
+      </article>
 
-    <!-- TEMPORADA -->
-    <article class="reviews-card">
-      <div class="reviews-card-header">
-        <span class="reviews-name">TEMPORADA 🍂❄️☀️🍁</span>
-      </div>
-      <p class="reviews-text">
-        Un apartado para los productos por temporadas, donde tendrán nuevas categorías de nuevos productos según la temporada que esté en ese momento.
-      </p>
-    </article>
+      <!-- TEMPORADA -->
+      <article class="reviews-card">
+        <div class="reviews-card-header">
+          <span class="reviews-name">TEMPORADA 🍂❄️☀️🍁</span>
+        </div>
+        <p class="reviews-text">
+          Un apartado para los productos por temporadas, donde tendrán nuevas categorías de nuevos productos según la
+          temporada que esté en ese momento.
+        </p>
+      </article>
 
-    <!-- NUEVO -->
-    <article class="reviews-card">
-      <div class="reviews-card-header">
-        <span class="reviews-name">NUEVO 🆕</span>
-      </div>
-      <p class="reviews-text">
-        Podrán ver los nuevos productos que estarán disponibles próximamente aun sin estar visibles y disponibles en la página principal.
-      </p>
-    </article>
-	
-	<!-- SECCION DE REGALOS -->
-    <article class="reviews-card">
-      <div class="reviews-card-header">
-        <span class="reviews-name">SECCION DE REGALOS 🎁</span>
-      </div>
-      <p class="reviews-text">
-        En esta sección los clientes no solo podrán comprar, sino también recibir regalos adicionales por sus compras. Tendrán acceso anticipado a nuevos arribos, ofertas especiales y la posibilidad de apartarlo todo antes de que llegue y esté disponible públicamente en la tienda.
-Cada interacción, recomendación y compra aumentarán sus oportunidades de obtener (GIFTS) aleatorios y exclusivos de este apartado.
-      </p>
-    </article>
-  </div>
-</aside>
+      <!-- NUEVO -->
+      <article class="reviews-card">
+        <div class="reviews-card-header">
+          <span class="reviews-name">NUEVO 🆕</span>
+        </div>
+        <p class="reviews-text">
+          Podrán ver los nuevos productos que estarán disponibles próximamente aun sin estar visibles y disponibles en
+          la página principal.
+        </p>
+      </article>
+
+      <!-- SECCION DE REGALOS -->
+      <article class="reviews-card">
+        <div class="reviews-card-header">
+          <span class="reviews-name">SECCION DE REGALOS 🎁</span>
+        </div>
+        <p class="reviews-text">
+          En esta sección los clientes no solo podrán comprar, sino también recibir regalos adicionales por sus compras.
+          Tendrán acceso anticipado a nuevos arribos, ofertas especiales y la posibilidad de apartarlo todo antes de que
+          llegue y esté disponible públicamente en la tienda. Cada interacción, recomendación y compra aumentarán sus
+          oportunidades de obtener (GIFTS) aleatorios y exclusivos de este apartado.
+        </p>
+      </article>
+    </div>
+  </aside>
 
   <!-- Overlay para cerrar sidebar al tocar fuera -->
   <div id="reviewsOverlay" class="reviews-overlay"></div>
@@ -645,6 +646,38 @@ Cada interacción, recomendación y compra aumentarán sus oportunidades de obte
       </div>
     </div>
   </section>
+
+  <!-- ====================== -->
+  <!--  MÓDULO TASAS DE HOY   -->
+  <!-- ====================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+    <h2 class="text-center text-2xl sm:text-3xl font-extrabold mb-6 tracking-tight">
+      Tasas de hoy
+    </h2>
+
+    <div class="flex justify-center gap-4 flex-wrap">
+      <!-- USD -->
+      <div
+        class="bg-gray-900/80 border border-gray-800 rounded-2xl px-6 py-4 w-40 flex flex-col items-center shadow-lg">
+        <img src="https://flagcdn.com/w40/us.png" alt="USD" class="mb-2 rounded-sm">
+        <span class="text-gray-300 text-sm font-medium">USD</span>
+        <span id="usd-cup" class="text-2xl font-extrabold mt-2">–</span>
+      </div>
+
+      <!-- EUR -->
+      <div
+        class="bg-gray-900/80 border border-gray-800 rounded-2xl px-6 py-4 w-40 flex flex-col items-center shadow-lg">
+        <img src="https://flagcdn.com/w40/eu.png" alt="EUR" class="mb-2 rounded-sm">
+        <span class="text-gray-300 text-sm font-medium">EUR</span>
+        <span id="eur-cup" class="text-2xl font-extrabold mt-2">–</span>
+      </div>
+    </div>
+
+    <p class="text-center text-xs sm:text-sm text-gray-500 mt-3">
+      Actualizado: <span id="fecha-tasas">–</span>
+    </p>
+  </section>
+  <!-- FIN MÓDULO TASAS -->
 
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-20">
@@ -825,6 +858,26 @@ Cada interacción, recomendación y compra aumentarán sus oportunidades de obte
       toggle.addEventListener('click', toggleReviews);
       overlay.addEventListener('click', toggleReviews);
     })();
+  </script>
+
+  <!-- =============================== -->
+  <!-- SCRIPT PARA LEER tasas.json    -->
+  <!-- =============================== -->
+  <script>
+    async function cargarTasas() {
+      try {
+        const res = await fetch('tasas.json'); // mismo nivel que index.html
+        const data = await res.json();
+
+        document.getElementById('usd-cup').textContent = data.usd_cup + ' CUP';
+        document.getElementById('eur-cup').textContent = data.eur_cup + ' CUP';
+        document.getElementById('fecha-tasas').textContent = data.fecha;
+      } catch (error) {
+        console.error('Error cargando tasas:', error);
+      }
+    }
+
+    cargarTasas();
   </script>
 </body>
 
