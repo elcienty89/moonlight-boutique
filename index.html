@@ -188,7 +188,6 @@
     /* CINTA DE LOGOS (FULL WIDTH)   */
     /* ============================== */
 
-    /* Wrapper: rompe el max-width y usa todo el viewport */
     .brand-carousel-wrapper {
       position: relative;
       width: 100vw;
@@ -203,15 +202,14 @@
     }
 
     .brand-track-logos {
-      display: inline-flex;
-      align-items: center;
-      gap: 4rem;
+      display: flex;
       width: max-content;
-      animation: scroll-logos 50s linear infinite;
+      will-change: transform;
     }
 
-    .brand-track-logos:hover {
-      animation-play-state: running;
+    .logos-group {
+      display: flex;
+      gap: 4rem;
     }
 
     .brand-item-logo {
@@ -225,25 +223,15 @@
       height: 60px;
       width: auto;
       object-fit: contain;
-      opacity: 0.7;
+      opacity: 0.85;
       filter: brightness(0) invert(1);
-      transition: all 0.3s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .brand-item-logo img:hover {
-      opacity: 0.7;
-      transform: none;
+      opacity: 1;
+      transform: scale(1.05);
       filter: brightness(0) invert(1);
-    }
-
-    @keyframes scroll-logos {
-      0% {
-        transform: translateX(-50%);
-      }
-
-      100% {
-        transform: translateX(0%);
-      }
     }
 
     @media (max-width: 768px) {
@@ -251,7 +239,7 @@
         height: 40px;
       }
 
-      .brand-track-logos {
+      .logos-group {
         gap: 2rem;
       }
     }
@@ -261,8 +249,9 @@
     /* ============================== */
 
     .brand-carousel {
-      width: 100%;
       overflow: hidden;
+      width: 100%;
+      white-space: nowrap;
     }
 
     .brand-track {
@@ -325,6 +314,179 @@
         gap: 3rem;
       }
     }
+
+    /* ============================== */
+    /* SIDEBAR DE RESEÑAS LATERAL    */
+    /* ============================== */
+
+    .reviews-toggle {
+      position: fixed;
+      left: 1rem;                     /* Pegado a la izquierda */
+      top: 1.3rem;                    /* Anclado en la barra superior */
+      z-index: 60;
+      cursor: pointer;
+      padding: 0.45rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reviews-toggle-bars {
+      position: relative;
+      width: 18px;
+      height: 22px;
+    }
+
+    .reviews-bar {
+      position: absolute;
+      left: 50%;
+      width: 3px;
+      height: 18px;
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+      transform-origin: center center;
+      transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
+    }
+
+    /* 3 barras verticales una al lado de la otra (cerrado) */
+    .reviews-bar:nth-child(1) {
+      transform: translateX(-6px);
+    }
+
+    .reviews-bar:nth-child(2) {
+      transform: translateX(0);
+    }
+
+    .reviews-bar:nth-child(3) {
+      transform: translateX(6px);
+    }
+
+    /* Estado X cuando está abierta la barra lateral */
+    body.reviews-open .reviews-bar:nth-child(1) {
+      transform: rotate(45deg);
+      height: 22px;
+    }
+
+    body.reviews-open .reviews-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.reviews-open .reviews-bar:nth-child(3) {
+      transform: rotate(-45deg);
+      height: 22px;
+    }
+
+    /* Sidebar lateral transparente con blur */
+    .reviews-sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: min(360px, 80vw);
+      background: rgba(5, 5, 5, 0.4);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      z-index: 50;
+      padding: 4.5rem 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.reviews-open .reviews-sidebar {
+      transform: translateX(0);
+    }
+
+    /* Overlay para oscurecer el fondo al abrir reseñas */
+    .reviews-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 40;
+    }
+
+    body.reviews-open .reviews-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Contenido interno del sidebar */
+    .reviews-sidebar-header {
+      margin-bottom: 1rem;
+    }
+
+    .reviews-sidebar-header h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f5f5f5;
+    }
+
+    .reviews-sidebar-header p {
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .reviews-list {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .reviews-card {
+      background: rgba(17, 24, 39, 0.92);
+      border-radius: 1rem;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      padding: 0.75rem 0.85rem;
+    }
+
+    .reviews-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .reviews-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .reviews-tag {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    .reviews-stars {
+      font-size: 0.75rem;
+      color: #facc15;
+      margin-bottom: 0.35rem;
+    }
+
+    .reviews-text {
+      font-size: 0.8rem;
+      color: #d1d5db;
+      margin-bottom: 0.3rem;
+    }
+
+    .reviews-meta {
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
   </style>
 </head>
 
@@ -338,110 +500,154 @@
     </div>
   </header>
 
+  <!-- Botón flotante para abrir/cerrar reseñas -->
+  <button id="reviewsToggle" class="reviews-toggle" aria-label="Abrir reseñas">
+    <div class="reviews-toggle-bars">
+      <span class="reviews-bar"></span>
+      <span class="reviews-bar"></span>
+      <span class="reviews-bar"></span>
+    </div>
+  </button>
+
+  <!-- Sidebar de reseñas -->
+  <aside class="reviews-sidebar" aria-label="Panel lateral MoonLight">
+  <div class="reviews-list">
+    <!-- PROXIMAMENTE -->
+    <article class="reviews-card">
+      <div class="reviews-card-header">
+        <span class="reviews-name">PROXIMAMENTE 🔜</span>
+      </div>
+      <p class="reviews-text">
+        Este espacio tendrá un apartado para reseñas de los clientes, donde acumularán (Lunas) ִֶָ☾ y tendrán la oportunidad de canjearlas por un regalo en su próxima compra y podrán ver cuantos habrán disponibles en el momento de recibirlos y escoger el que prefieran.
+      </p>
+    </article>
+
+    <!-- TEMPORADA -->
+    <article class="reviews-card">
+      <div class="reviews-card-header">
+        <span class="reviews-name">TEMPORADA 🍂❄️☀️🍁</span>
+      </div>
+      <p class="reviews-text">
+        Un apartado para los productos por temporadas, donde tendrán nuevas categorías de nuevos productos según la temporada que esté en ese momento.
+      </p>
+    </article>
+
+    <!-- NUEVO -->
+    <article class="reviews-card">
+      <div class="reviews-card-header">
+        <span class="reviews-name">NUEVO 🆕</span>
+      </div>
+      <p class="reviews-text">
+        Podrán ver los nuevos productos que estarán disponibles próximamente aun sin estar visibles y disponibles en la página principal.
+      </p>
+    </article>
+	
+	<!-- SECCION DE REGALOS -->
+    <article class="reviews-card">
+      <div class="reviews-card-header">
+        <span class="reviews-name">SECCION DE REGALOS 🎁</span>
+      </div>
+      <p class="reviews-text">
+        En esta sección los clientes no solo podrán comprar, sino también recibir regalos adicionales por sus compras. Tendrán acceso anticipado a nuevos arribos, ofertas especiales y la posibilidad de apartarlo todo antes de que llegue y esté disponible públicamente en la tienda.
+Cada interacción, recomendación y compra aumentarán sus oportunidades de obtener (GIFTS) aleatorios y exclusivos de este apartado.
+      </p>
+    </article>
+  </div>
+</aside>
+
+  <!-- Overlay para cerrar sidebar al tocar fuera -->
+  <div id="reviewsOverlay" class="reviews-overlay"></div>
+
   <!-- Hero Section -->
-  <section class="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section class="relative pt-10 sm:pt-16 pb-6 sm:pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-7xl mx-auto">
       <div class="text-center fade-in-up">
-        <h1 class="hero-title mb-6">DESCUBRE LA<br />NUEVA COLECCIÓN</h1>
+        <h1 class="hero-title mb-10">DESCUBRE LA<br />NUEVA COLECCIÓN</h1>
       </div>
 
       <!-- Cinta de Logos (Imágenes) - FULL WIDTH -->
-      <div class="brand-carousel-wrapper py-4 mb-8">
+      <div class="brand-carousel-wrapper my-10">
         <div class="brand-track-logos">
-          <!-- Grupo 1 de Logos -->
-          <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
-          <div class="brand-item-logo"><img src="images/brands/aldo.png" alt="Aldo"></div>
-          <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
-          <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
-          <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
-          <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
-          <div class="brand-item-logo"><img src="images/brands/juicy-couture.png" alt="Juicy Couture"></div>
-          <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
-          <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
-          <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
-          <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
-          <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
-          <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
-          <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
-          <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
-          <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
-          <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
-          <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
-          <div class="brand-item-logo"><img src="images/brands/Burberry-Logo.png" alt="Burberry"></div>
-          <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
-          <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
-          <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
-          <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
-          <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
-          <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
-          <!-- Grupo 2 (Duplicado para efecto infinito) -->
-          <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
-          <div class="brand-item-logo"><img src="images/brands/aldo.png" alt="Aldo"></div>
-          <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
-          <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
-          <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
-          <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
-          <div class="brand-item-logo"><img src="images/brands/juicy-couture.png" alt="Juicy Couture"></div>
-          <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
-          <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
-          <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
-          <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
-          <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
-          <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
-          <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
-          <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
-          <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
-          <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
-          <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
-          <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
-          <div class="brand-item-logo"><img src="images/brands/Burberry-Logo.png" alt="Burberry"></div>
-          <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
-          <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
-          <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
-          <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
-          <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
-          <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
-        </div>
-      </div>
+          <!-- GRUPO 1 -->
+          <div class="logos-group" id="logos-group-1">
+            <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
+            <div class="brand-item-logo"><img src="images/brands/Balenciaga.png" alt="Balenciaga"></div>
+            <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
+            <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
+            <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
+            <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
+            <div class="brand-item-logo"><img src="images/brands/Hermes.png" alt="Hermes"></div>
+            <div class="brand-item-logo"><img src="images/brands/Alexander McQueen.png" alt="Alexander McQueen"></div>
+            <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
+            <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
+            <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
+            <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
+            <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
+            <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
+            <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
+            <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
+            <div class="brand-item-logo"><img src="images/brands/Miu Miu.png" alt="Miu"></div>
+            <div class="brand-item-logo"><img src="images/brands/H&M.png" alt="H&M"></div>
+            <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
+            <div class="brand-item-logo"><img src="images/brands/Versace.png" alt="Versace"></div>
+            <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
+            <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
+            <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
+            <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
+            <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
+            <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
+            <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
+            <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
+            <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
+            <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
+            <div class="brand-item-logo"><img src="images/brands/Shein.png" alt="Shein"></div>
+            <div class="brand-item-logo"><img src="images/brands/The-North-Face-Logo.png" alt="The-North-Face-Logo">
+            </div>
+          </div>
 
-      <!-- Cinta de texto de marcas -->
-      <div class="brand-track">
-        <!-- Primer grupo de logos -->
-        <div class="brand-item"><span class="brand-text">SHEIN</span></div>
-        <div class="brand-item"><span class="brand-text">NIKE</span></div>
-        <div class="brand-item"><span class="brand-text">ADIDAS</span></div>
-        <div class="brand-item"><span class="brand-text">PUMA</span></div>
-        <div class="brand-item"><span class="brand-text">UNDER ARMOUR</span></div>
-        <div class="brand-item"><span class="brand-text">ZARA</span></div>
-        <div class="brand-item"><span class="brand-text">GUCCI</span></div>
-        <div class="brand-item"><span class="brand-text">CHANEL</span></div>
-        <div class="brand-item"><span class="brand-text">LOUIS VUITTON</span></div>
-        <div class="brand-item"><span class="brand-text">H&M</span></div>
-        <div class="brand-item"><span class="brand-text">M.A.C</span></div>
-        <div class="brand-item"><span class="brand-text">FOREVER 21</span></div>
-        <div class="brand-item"><span class="brand-text">VERSACE</span></div>
-        <div class="brand-item"><span class="brand-text">FENDI</span></div>
-        <div class="brand-item"><span class="brand-text">BURBERRY</span></div>
-        <div class="brand-item"><span class="brand-text">BALENCIAGA</span></div>
-        <div class="brand-item"><span class="brand-text">HERMES</span></div>
-        <div class="brand-item"><span class="brand-text">VALENTINO</span></div>
-        <div class="brand-item"><span class="brand-text">DOLCE & GABBANA</span></div>
-        <div class="brand-item"><span class="brand-text">MOSCHINO</span></div>
-        <div class="brand-item"><span class="brand-text">KENZO</span></div>
-        <div class="brand-item"><span class="brand-text">MONCLER</span></div>
-        <div class="brand-item"><span class="brand-text">BALMAIN</span></div>
-        <div class="brand-item"><span class="brand-text">VALENTINO</span></div>
-        <div class="brand-item"><span class="brand-text">BURBERRY</span></div>
-        <div class="brand-item"><span class="brand-text">CHRISTIAN DIOR</span></div>
+          <!-- GRUPO 2 (COPIA EXACTA) -->
+          <div class="logos-group" id="logos-group-2">
+            <div class="brand-item-logo"><img src="images/brands/aeropostale.png" alt="Aeropostale"></div>
+            <div class="brand-item-logo"><img src="images/brands/Balenciaga.png" alt="Balenciaga"></div>
+            <div class="brand-item-logo"><img src="images/brands/chanel.png" alt="Chanel"></div>
+            <div class="brand-item-logo"><img src="images/brands/Givenchy.png" alt="Givenchy"></div>
+            <div class="brand-item-logo"><img src="images/brands/Gucci.png" alt="Gucci"></div>
+            <div class="brand-item-logo"><img src="images/brands/guess.png" alt="Guess"></div>
+            <div class="brand-item-logo"><img src="images/brands/Hermes.png" alt="Hermes"></div>
+            <div class="brand-item-logo"><img src="images/brands/Alexander McQueen.png" alt="Alexander McQueen"></div>
+            <div class="brand-item-logo"><img src="images/brands/Louis Vuitton.png" alt="Louis Vuitton"></div>
+            <div class="brand-item-logo"><img src="images/brands/nike.png" alt="Nike"></div>
+            <div class="brand-item-logo"><img src="images/brands/steve-madden.png" alt="Steve Madden"></div>
+            <div class="brand-item-logo"><img src="images/brands/UA.png" alt="Under Armour"></div>
+            <div class="brand-item-logo"><img src="images/brands/victorias-secret.png" alt="Victoria's Secret"></div>
+            <div class="brand-item-logo"><img src="images/brands/ysl.png" alt="YSL"></div>
+            <div class="brand-item-logo"><img src="images/brands/New-Balance-Logo.png" alt="New-Balance-Logo"></div>
+            <div class="brand-item-logo"><img src="images/brands/Adidas.png" alt="Adidas"></div>
+            <div class="brand-item-logo"><img src="images/brands/Miu Miu.png" alt="Miu"></div>
+            <div class="brand-item-logo"><img src="images/brands/H&M.png" alt="H&M"></div>
+            <div class="brand-item-logo"><img src="images/brands/Alo-Logo.png" alt="Alo"></div>
+            <div class="brand-item-logo"><img src="images/brands/Versace.png" alt="Versace"></div>
+            <div class="brand-item-logo"><img src="images/brands/Amiri-Logo.png" alt="Amiri"></div>
+            <div class="brand-item-logo"><img src="images/brands/Armani-Exchange-Logo.png" alt="Armani Exchange"></div>
+            <div class="brand-item-logo"><img src="images/brands/Balmain-Logo.png" alt="Balmain"></div>
+            <div class="brand-item-logo"><img src="images/brands/Bershka-Logo.png" alt="Bershka"></div>
+            <div class="brand-item-logo"><img src="images/brands/Calvin-Klein-Logo.png" alt="Calvin Klein"></div>
+            <div class="brand-item-logo"><img src="images/brands/Christian-Dior-Logo.png" alt="Christian Dior"></div>
+            <div class="brand-item-logo"><img src="images/brands/Dolce-Gabbana-Logo.png" alt="Dolce Gabbana"></div>
+            <div class="brand-item-logo"><img src="images/brands/Fendi-Logo.png" alt="Fendi"></div>
+            <div class="brand-item-logo"><img src="images/brands/zara.png" alt="zara"></div>
+            <div class="brand-item-logo"><img src="images/brands/Valentino-Logo.png" alt="Valentino"></div>
+            <div class="brand-item-logo"><img src="images/brands/Shein.png" alt="Shein"></div>
+            <div class="brand-item-logo"><img src="images/brands/The-North-Face-Logo.png" alt="The-North-Face-Logo">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-20">
     <!-- Filters Section -->
     <section class="mb-12">
       <div class="flex flex-col space-y-8">
@@ -461,6 +667,7 @@
           <p class="text-sm text-indigo-200 font-medium text-center flex items-center justify-center gap-2">
             <span class="text-lg">🎊</span>
             Todas las marcas dentro de la Categoria (Premium✨) son marcas 100% originales y registradas por codigos
+            oficiales
             <span class="text-lg">🎊</span>
           </p>
         </div>
@@ -567,6 +774,58 @@
   <script src="script.js?v=2"></script>
   <script src="simple-lightbox.js"></script>
   <script src="confetti-effect.js"></script>
+
+  <!-- Animación perfecta de la cinta de logos -->
+  <script>
+    window.addEventListener('load', () => {
+      const track = document.querySelector('.brand-track-logos');
+      const group1 = document.getElementById('logos-group-1');
+
+      if (!track || !group1) return;
+
+      function startLogosAnimation() {
+        const groupWidth = group1.getBoundingClientRect().width;
+
+        track.getAnimations().forEach(a => a.cancel());
+
+        track.animate(
+          [
+            { transform: 'translateX(0)' },
+            { transform: `translateX(-${groupWidth}px)` }
+          ],
+          {
+            duration: 80000,
+            iterations: Infinity,
+            easing: 'linear'
+          }
+        );
+      }
+
+      startLogosAnimation();
+
+      window.addEventListener('resize', () => {
+        startLogosAnimation();
+      });
+    });
+  </script>
+
+  <!-- Lógica de apertura/cierre de sidebar de reseñas -->
+  <script>
+    (function () {
+      const toggle = document.getElementById('reviewsToggle');
+      const overlay = document.getElementById('reviewsOverlay');
+      const body = document.body;
+
+      if (!toggle || !overlay) return;
+
+      function toggleReviews() {
+        body.classList.toggle('reviews-open');
+      }
+
+      toggle.addEventListener('click', toggleReviews);
+      overlay.addEventListener('click', toggleReviews);
+    })();
+  </script>
 </body>
 
 </html>

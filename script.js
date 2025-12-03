@@ -2,7 +2,7 @@
 // CONFIGURACIÓN: MONEDA
 // ==============================
 const EXCHANGE_RATE_API = 'https://api.allorigins.win/get?url=https://eltoque.com/tasas-de-cambio-de-moneda-en-cuba-hoy';
-const DEFAULT_EXCHANGE_RATE = 440; // Updated to actual rate (CUP per USD)
+const DEFAULT_EXCHANGE_RATE = 450; // Updated to actual rate (CUP per USD)
 let currentExchangeRate = DEFAULT_EXCHANGE_RATE;
 
 // Intentar obtener la tasa real
