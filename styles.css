@@ -1,0 +1,445 @@
+/* ========================================= */
+/* ANIMACIONES LOGO */
+/* ========================================= */
+@keyframes logoPulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
+    transform: scale(1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6));
+    transform: scale(1.05);
+  }
+}
+
+.logo-effect {
+  animation: logoPulse 3s infinite ease-in-out;
+}
+
+/* ========================================= */
+/* NAVIDAD: LUCES Y GUIRNALDAS */
+/* ========================================= */
+.christmas-lights-container {
+  position: absolute;
+  top: -45px;
+  /* Adjust position above title */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110%;
+  /* Wider than title */
+  max-width: 600px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.christmas-lights {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 3px solid #1a472a;
+  /* Green wire */
+  border-radius: 100% 100% 0 0 / 40% 40% 0 0;
+  /* Curve downwards */
+  position: relative;
+  height: 40px;
+}
+
+.christmas-lights li {
+  position: relative;
+  top: -7px;
+  width: 14px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 0 5px;
+  animation: lightFlash 1s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.christmas-lights li::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #222;
+  border-radius: 2px;
+}
+
+/* Colors */
+.christmas-lights li:nth-child(4n+1) {
+  background: #ff3333;
+  box-shadow: 0 3px 15px rgba(255, 51, 51, 0.8);
+  animation-delay: 0s;
+}
+
+.christmas-lights li:nth-child(4n+2) {
+  background: #33ff33;
+  box-shadow: 0 3px 15px rgba(51, 255, 51, 0.8);
+  animation-delay: 0.5s;
+}
+
+.christmas-lights li:nth-child(4n+3) {
+  background: #3333ff;
+  box-shadow: 0 3px 15px rgba(51, 51, 255, 0.8);
+  animation-delay: 1s;
+}
+
+.christmas-lights li:nth-child(4n+4) {
+  background: #ffff33;
+  box-shadow: 0 3px 15px rgba(255, 255, 51, 0.8);
+  animation-delay: 1.5s;
+}
+
+@keyframes lightFlash {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+/* ========================================= */
+/* ESTILOS GLOBALES */
+/* ========================================= */
+
+/* ============================= */
+/* RESET BÁSICO                  */
+/* ============================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+
+  /* Nuevo Fondo: Degradado oscuro estilo "MoonLight" */
+  background: linear-gradient(135deg, #050505 0%, #0f172a 50%, #2e1065 100%);
+  background-attachment: fixed;
+  /* Hace que el fondo se quede fijo elegante al bajar */
+
+  color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* ============================= */
+/* TARJETAS DE PRODUCTO          */
+/* ============================= */
+
+.product-card {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.8);
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================= */
+/* BADGES (ETIQUETAS) PREMIUM    */
+/* ============================= */
+
+/* Base compartida */
+.badge-neon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 20;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.badge-neon:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+/* 1. ESTILO PREMIUM (ORO / LUXURY) */
+.badge-premium {
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  color: #fbbf24;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(251, 191, 36, 0.25),
+    inset 0 0 10px rgba(251, 191, 36, 0.05);
+}
+
+.badge-premium::before {
+  content: '✦';
+  color: #fff;
+  font-size: 1.1em;
+  filter: drop-shadow(0 0 4px #fbbf24);
+}
+
+/* 2. ESTILO ROPA (FASHION / VIBRANTE) */
+.badge-ropa {
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(236, 72, 153, 0.6);
+  color: #fff;
+  background-image: linear-gradient(135deg,
+      rgba(236, 72, 153, 0.15) 0%,
+      rgba(139, 92, 246, 0.05) 100%);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 12px rgba(236, 72, 153, 0.3);
+}
+
+.badge-ropa::before {
+  content: '•';
+  color: #ec4899;
+  font-size: 1.4em;
+  line-height: 0;
+  margin-top: -2px;
+}
+
+/* 3. ESTILO NORMAL / OTROS */
+.badge-normal {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e5e7eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+/* ============================= */
+/* NOMBRES DE PRODUCTOS          */
+/* ============================= */
+
+.product-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+/* ===== SOLO PREMIUM ===== */
+
+.product-title-premium {
+  position: relative;
+  color: #f9fafb;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.9rem;
+  text-shadow:
+    0 0 10px rgba(15, 23, 42, 0.7),
+    0 0 18px rgba(148, 163, 184, 0.55);
+  transition: all 0.3s ease;
+}
+
+.product-title-premium::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 42%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #facc15, #f97316, #a855f7);
+  box-shadow: 0 0 12px rgba(250, 250, 250, 0.5), 0 0 18px rgba(129, 140, 248, 0.6);
+  transition: width 0.35s ease-out;
+}
+
+.product-card:hover .product-title-premium::after {
+  width: 70%;
+}
+
+/* ============================= */
+/* PRECIOS                       */
+/* ============================= */
+
+.price-display {
+  text-align: right;
+}
+
+.price-usd {
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.cup-amount {
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+/* ============================= */
+/* BOTÓN WHATSAPP                */
+/* ============================= */
+
+.whatsapp-btn {
+  border-radius: 999px;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.whatsapp-btn:hover {
+  background: #1da851 !important;
+  transform: scale(1.04);
+}
+
+/* ============================= */
+/* HERO / TEXTO PRINCIPAL        */
+/* ============================= */
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-rotating-word {
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.45em;
+  background: linear-gradient(120deg, #ffffff, #c084fc, #22d3ee, #6366f1, #ffffff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(192, 132, 252, 0.35), 0 0 40px rgba(34, 211, 238, 0.30);
+  animation: gradientFlow 7s ease-in-out infinite;
+
+  /* --- LO NUEVO PARA EL EFECTO (AGREGA ESTO) --- */
+  display: inline-block;
+  /* Vital para que funcionen las transformaciones */
+  transition: all 0.5s ease-in-out;
+  /* La velocidad del fundido */
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+}
+
+/* --- CLASE NUEVA (Se activa con JS) --- */
+.word-blur-hidden {
+  opacity: 0;
+  /* Se vuelve transparente */
+  filter: blur(12px);
+  /* Se desenfoca como humo */
+  transform: scale(1.1);
+  /* Crece un poco al desaparecer (efecto zoom) */
+  text-shadow: none;
+  /* Quitamos la sombra al salir para que se vea limpio */
+}
+
+/* Mantén tu @keyframes gradientFlow tal cual lo tienes */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================= */
+/* MENÚ HAMBURGUESA              */
+/* ============================= */
+
+.reviews-toggle {
+  position: fixed;
+  left: 1.25rem;
+  top: 1.5rem;
+  z-index: 60;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+}
+
+.reviews-toggle-bars {
+  position: relative;
+  width: 26px;
+  height: 22px;
+}
+
+.reviews-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 3px;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a855f7, #22d3ee, #6366f1);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.6), 0 0 14px rgba(34, 211, 238, 0.4);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.reviews-bar:nth-child(1) {
+  transform: translateY(-7px);
+}
+
+.reviews-bar:nth-child(2) {
+  transform: translateY(0);
+}
+
+.reviews-bar:nth-child(3) {
+  transform: translateY(7px);
+}
+
+body.reviews-open .reviews-bar:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+body.reviews-open .reviews-bar:nth-child(2) {
+  opacity: 0;
+}
+
+body.reviews-open .reviews-bar:nth-child(3) {
+  transform: rotate(-45deg);
+}

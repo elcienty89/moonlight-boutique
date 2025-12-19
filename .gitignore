@@ -1,0 +1,44 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Entorno
+.env
+.env.local
+.env.*.local
+
+# Backups (no necesarios en producción)
+backup*/
+*_backup*.html
+index_temp.html
+
+# Scripts de PowerShell (herramientas de desarrollo)
+*.ps1
+
+# Python scripts (herramientas de desarrollo)
+*.py
+
+# Archivos de texto de desarrollo
+test_scripts.txt
+
+# Archivos markdown de guías (opcional mantener README.md)
+COMO_PUBLICAR.md
+GUIA_GITHUB_NETLIFY.md
+GUIA_RAPIDA_ACTUALIZACION.md
