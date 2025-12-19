@@ -447,14 +447,12 @@ function renderProducts(list) {
 
     if (typeof p.oldPrice === "number") {
       priceHtml = `
-        <div class="flex flex-col">
-          <div class="flex items-baseline gap-2 sm:gap-3">
-            <span class="text-xs sm:text-sm font-bold text-red-500 line-through">$${p.oldPrice.toFixed(2)}</span>
-            <span class="price-display text-2xl font-black text-white" data-usd-price="${p.precio}">
-              <span class="price-usd block leading-tight">$${p.precio.toFixed(2)}</span>
-              <span class="cup-amount block text-[0.70rem] sm:text-xs text-gray-400 font-normal leading-tight mt-0.5">(~${cupPrice} CUP)</span>
-            </span>
-          </div>
+        <div class="flex flex-col items-start gap-0.5">
+          <span class="text-xs sm:text-sm font-bold text-red-500 line-through opacity-80">$${p.oldPrice.toFixed(2)}</span>
+          <span class="price-display text-2xl font-black text-white" data-usd-price="${p.precio}">
+            <span class="price-usd block leading-tight">$${p.precio.toFixed(2)}</span>
+            <span class="cup-amount block text-[0.70rem] sm:text-xs text-gray-400 font-normal leading-tight mt-0.5">(~${cupPrice} CUP)</span>
+          </span>
         </div>
       `;
     } else {
